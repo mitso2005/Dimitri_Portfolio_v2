@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/* Font-face declarations */
+@font-face {
+  font-family: 'Junicode';
+  src: url('./assets/fonts/Junicode-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Junicode';
+  src: url('./assets/fonts/Junicode-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('./assets/fonts/Satoshi-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentient';
+  src: url('./assets/fonts/Sentient-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentient';
+  src: url('./assets/fonts/Sentient-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
 :root {
   --color-primary-blue: #ADCCEE;
   --color-primary-pink: #FFDBE4;
@@ -7,7 +39,11 @@
   --color-light: #F7F4F2;
   --color-dark: #111B2D;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-junicode: 'Junicode', serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-sentient: 'Sentient', serif;
+
+  font-family: var(--font-junicode), var(--font-satoshi), var(--font-sentient);
   line-height: 1.5;
   font-weight: 400;
 
@@ -39,8 +75,48 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-family: var(--font-junicode);
+  font-weight: 400;
+  font-size: 172px;
+  letter-spacing: -2%;
+  /* line-height: normal; */
+}
+
+h2 {
+  font-family: var(--font-junicode);
+  font-weight: 400;
+  font-size: 96px;
+  letter-spacing: 0%;
+  /* line-height: normal; */
+}
+
+h3 {
+  font-family: var(--font-junicode);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 0%;
+  /* line-height: normal; */
+}
+
+h4 {
+  font-family: var(--font-satoshi);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0%;
+  /* line-height: normal; */
+}
+
+p {
+  font-family: var(--font-sentient);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -1%;
+}
+
+p.italic {
+  font-family: var(--font-sentient);
+  font-style: italic;
 }
 
 button {
