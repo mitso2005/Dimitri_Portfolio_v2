@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
+import heroImage from '../assets/hero_image.svg';
 
 function HoverLink({ to, defaultText, hoverText, className }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -18,13 +19,13 @@ function HoverLink({ to, defaultText, hoverText, className }) {
 export default function Home() {
   return (
     <div>
-      <nav className="home-nav">
+        <img src={heroImage} alt="Hero illustration" className="hero-image" />
+        <nav className="home-nav">
         <HoverLink to="/about" defaultText="HI" hoverText="about" className="home-link" />
         <HoverLink to="/work" defaultText="MY" hoverText="work" className="home-link" />
         <HoverLink to="/mail" defaultText="NAME'S" hoverText="mail" className="home-link" />
         <HoverLink to="/contact" defaultText="DIMITRI" hoverText="contact" className="home-link" />
-      </nav>
-      <p>Welcome to the portfolio homepage.</p>
+        </nav>
     </div>
   );
 }

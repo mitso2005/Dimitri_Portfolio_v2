@@ -63,6 +63,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 h1 {
@@ -145,13 +146,4 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  overflow: hidden; /* Prevent scrolling */
 }

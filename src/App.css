@@ -5,10 +5,11 @@
   text-align: center;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.hero-image {
+  position: fixed;
+  top: 60%;
+  transform: translateY(-50%);
+  height: 90vh;
+  width: auto;
+  pointer-events: none;
 }
