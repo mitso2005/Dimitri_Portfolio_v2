@@ -48,22 +48,13 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-dark);
+  background-color: var(--color-light);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: var(--color-primary-blue);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--color-primary-pink);
 }
 
 body {
@@ -119,34 +110,48 @@ p.italic {
   font-style: italic;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+a {
+  font-family: var(--font-satoshi);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0%;
+  transition: font-style 0.2s, transform 0.2s;
 }
-button:hover {
-  border-color: var(--color-primary-blue);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+a:hover {
+  color: var(--color-secondary-blue);
+  transform: translateY(-10px);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: var(--color-light);
-  }
-  a:hover {
-    color: var(--color-primary-blue);
-  }
-  button {
-    background-color: var(--color-light);
-  }
+.home-link {
+  font-family: var(--font-junicode);
+  color: var(--color-dark);
+  font-weight: 400;
+  font-size: 172px;
+  letter-spacing: -2%;
+  text-decoration: none;
+  margin-bottom: -80px;
+  transition: font-style 0.2s, transform 0.2s;
+}
+
+.hover-text {
+  color: var(--color-secondary-blue);
+  font-style: italic;
+}
+
+.home-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
 }
