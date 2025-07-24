@@ -7,9 +7,25 @@
 
 .hero-image {
   position: fixed;
+  right: -10%;
   top: 60%;
   transform: translateY(-50%);
-  height: 90vh;
+  height: 100vh;    
   width: auto;
   pointer-events: none;
+  z-index: -1; 
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    display: block;
+    height: auto;    
+    width: auto;
+    min-width: 120vw;      
+    min-height: 150vh;
+    right: -50vw;    
+    top: -20vh;    
+    transform: none;
+    z-index: -1;
+  }
 }
