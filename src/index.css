@@ -134,6 +134,13 @@ a:hover {
   transition: font-style 0.2s, transform 0.2s;
 }
 
+@media (max-width: 768px) {
+  .home-link {
+    font-size: 76px;
+    margin-bottom: -35px; /* Adjusted to account for smaller text */
+  }
+}
+
 .hover-text {
   color: var(--color-secondary-blue);
   font-style: italic;
