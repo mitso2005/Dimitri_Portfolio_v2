@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react'
+import Logo from './components/Logo';
 import Home from './pages/Home';
 import About from './pages/About';
 import Work from './pages/Work';
@@ -9,9 +9,9 @@ import Contact from './pages/Contact';
 import './App.css'
 
 function App() {
-
   return (
     <BrowserRouter>
+      <Logo />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

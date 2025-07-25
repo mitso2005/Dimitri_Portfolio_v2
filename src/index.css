@@ -98,6 +98,14 @@ h4 {
   /* line-height: normal; */
 }
 
+h5 {
+  font-family: var(--font-junicode);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0%;
+  /* line-height: normal; */
+}
+
 p {
   font-family: var(--font-sentient);
   font-weight: 300;
@@ -131,7 +139,6 @@ a:hover {
   letter-spacing: -2%;
   text-decoration: none;
   margin-bottom: -80px;
-  transition: font-style 0.2s, transform 0.2s;
 }
 
 @media (max-width: 768px) {
@@ -144,6 +151,9 @@ a:hover {
 .hover-text {
   color: var(--color-secondary-blue);
   font-style: italic;
+  transform: translateX(80px);
+  transition: font-style 0.2s, transform 0.2s ease;
+  display: inline-block; /* Important to make transform work */
 }
 
 .home-nav {
