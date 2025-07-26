@@ -172,7 +172,7 @@ a:hover {
 @media (max-width: 768px) {
   .hover-text.mobile-hover {
     color: var(--color-dark);
-    font-style: normal;
+    font-style: italic;
     transform: translateX(0);
   }
 }

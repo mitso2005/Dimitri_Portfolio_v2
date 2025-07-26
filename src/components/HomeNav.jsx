@@ -116,7 +116,7 @@ export default function HomeNav() {
         const actualIndex = index + 1;
         setTimeout(() => {
           setPermanentlyRevealed(prev => new Set([...prev, actualIndex]));
-        }, (actualIndex) * 1000); // 1s, 2s, 3s delays
+        }, (actualIndex) * 500); // 0.5s, 1s, 1.5s delays
       });
     }, 2000);
 
