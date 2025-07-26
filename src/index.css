@@ -167,12 +167,3 @@ a:hover {
   transition: font-style 0.2s, transform 0.2s ease;
   display: inline-block; /* Important to make transform work */
 }
-
-.home-nav {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
