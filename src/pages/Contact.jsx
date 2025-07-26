@@ -6,7 +6,7 @@ export default function Contact() {
     <div>
       <PageNav />
       <h1>Contact Page</h1>
-      <p>This is the contact page.</p>
+      <p>Hey, did you know that I also make social media content?</p>
     </div>
   );
 }

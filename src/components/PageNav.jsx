@@ -11,10 +11,10 @@ export default function PageNav() {
     <>
       {/* Desktop Nav */}
       <nav className="hidden md:flex absolute top-5 left-10 gap-8 z-50">
-        <Link to="/about"><h4 className="hover:text-[var(--color-primary-blue)]">ABOUT</h4></Link>
-        <Link to="/work"><h4 className="hover:text-[var(--color-primary-blue)]">WORK</h4></Link>
-        <Link to="/mail"><h4 className="hover:text-[var(--color-primary-blue)]">MAIL</h4></Link>
-        <Link to="/contact"><h4 className="hover:text-[var(--color-primary-blue)]">CONTACT</h4></Link>
+        <Link to="/about"><h4 className="hover:text-[var(--color-secondary-blue)]">ABOUT</h4></Link>
+        <Link to="/work"><h4 className="hover:text-[var(--color-secondary-blue)]">WORK</h4></Link>
+        <Link to="/newsletter"><h4 className="hover:text-[var(--color-secondary-blue)]">NEWSLETTER</h4></Link>
+        <Link to="/contact"><h4 className="hover:text-[var(--color-secondary-blue)]">CONTACT ME</h4></Link>
       </nav>
 
       {/* Mobile Hamburger */}
@@ -42,11 +42,11 @@ export default function PageNav() {
           <Link to="/work" onClick={closeMenu}>
             <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">WORK</h4>
           </Link>
-          <Link to="/mail" onClick={closeMenu}>
-            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">MAIL</h4>
+          <Link to="/newsletter" onClick={closeMenu}>
+            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">NEWSLETTER</h4>
           </Link>
           <Link to="/contact" onClick={closeMenu}>
-            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">CONTACT</h4>
+            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">CONTACT ME</h4>
           </Link>
         </div>
       )}

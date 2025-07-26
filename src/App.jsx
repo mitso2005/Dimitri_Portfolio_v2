@@ -4,7 +4,7 @@ import Logo from './components/Logo';
 import Home from './pages/Home';
 import About from './pages/About';
 import Work from './pages/Work';
-import Mail from './pages/Mail';
+import Mail from './pages/Newsletter';
 import Contact from './pages/Contact';
 import './App.css'
 
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/work" element={<Work />} />
-        <Route path="/mail" element={<Mail />} />
+        <Route path="/newsletter" element={<Mail />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const links = [
   { to: "/about", defaultText: "HI", hoverText: "about" },
   { to: "/work", defaultText: "MY", hoverText: "work" },
-  { to: "/mail", defaultText: "NAME'S", hoverText: "mail" },
-  { to: "/contact", defaultText: "DIMITRI", hoverText: "contact" },
+  { to: "/newsletter", defaultText: "NAME'S", hoverText: "newsletter" },
+  { to: "/contact", defaultText: "DIMITRI", hoverText: "contact me" },
 ];
 
 function HoverLink({ to, defaultText, hoverText, className, isAutoHovered, onMouseEnter, onMouseLeave, isMobile }) {
