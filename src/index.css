@@ -167,3 +167,12 @@ a:hover {
   transition: font-style 0.2s, transform 0.2s ease;
   display: inline-block; /* Important to make transform work */
 }
+
+/* Mobile-specific hover text styling */
+@media (max-width: 768px) {
+  .hover-text.mobile-hover {
+    color: var(--color-dark);
+    font-style: normal;
+    transform: translateX(0);
+  }
+}
