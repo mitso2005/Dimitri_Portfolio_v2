@@ -21,7 +21,7 @@ export default function PageNav() {
       <div className="md:hidden fixed top-6 right-10 z-50">
         <button
           onClick={toggleMenu}
-          className={`text-3xl transition-colors ${
+          className={`text-3xl cursor-pointer transition-colors ${
             menuOpen
               ? 'text-[var(--color-light)] hover:text-[var(--color-primary-pink)]'
               : 'text-[var(--color-dark)] hover:text-[var(--color-secondary-blue)]'
