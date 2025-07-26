@@ -6,6 +6,7 @@ export default function Logo() {
     <Link
       to="/"
       className="
+        animate-fade-in
         fixed 
         top-5
         left-10
