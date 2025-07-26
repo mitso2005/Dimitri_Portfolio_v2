@@ -9,9 +9,21 @@
 }
 @font-face {
   font-family: 'Junicode';
+  src: url('./assets/fonts/Junicode-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Junicode';
   src: url('./assets/fonts/Junicode-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+}
+@font-face {
+  font-family: 'Junicode';
+  src: url('./assets/fonts/Junicode-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
 }
 @font-face {
   font-family: 'Satoshi';
@@ -128,7 +140,7 @@ a {
 }
 a:hover {
   color: var(--color-secondary-blue);
-  transform: translateY(-10px);
+  transform: translateY(-2px);
 }
 
 .home-link {

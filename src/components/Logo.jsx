@@ -7,13 +7,13 @@ export default function Logo() {
       to="/"
       className="
         fixed 
-        top-4 
-        left-4 
-        md:right-4 md:left-auto 
+        top-5
+        left-10
+        md:right-10 md:left-auto 
         z-50
       "
     >
-      <h5 className="text-lg md:text-xl font-semibold italic md:not-italic">
+      <h5 className="font-bold italic md:not-italic">
         <span className="md:hidden">Dimitri</span>
         <span className="hidden md:inline">Dimitri Petrakis</span>
       </h5>
