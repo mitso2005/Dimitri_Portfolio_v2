@@ -5,8 +5,8 @@ export default function Work() {
   return (
     <div>
       <PageNav />
-      <h1>Work Page</h1>
-      <p>This is the work page.</p>
+      <h1>Developer Work</h1>
+      <p>Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!</p>
     </div>
   );
 }

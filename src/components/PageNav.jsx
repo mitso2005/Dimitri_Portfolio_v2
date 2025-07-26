@@ -10,11 +10,11 @@ export default function PageNav() {
   return (
     <>
       {/* Desktop Nav */}
-      <nav className="hidden md:flex absolute top-5 left-10 gap-8 z-50">
-        <Link to="/about"><h4 className="hover:text-[var(--color-secondary-blue)]">ABOUT</h4></Link>
-        <Link to="/work"><h4 className="hover:text-[var(--color-secondary-blue)]">WORK</h4></Link>
-        <Link to="/newsletter"><h4 className="hover:text-[var(--color-secondary-blue)]">NEWSLETTER</h4></Link>
-        <Link to="/contact"><h4 className="hover:text-[var(--color-secondary-blue)]">CONTACT ME</h4></Link>
+      <nav className="hidden md:flex absolute left-10 z-50 top-7 lg:top-5 gap-6 lg:gap-8">
+        <Link to="/about"><h4 className="font-nav-sm hover:text-[var(--color-secondary-blue)]">ABOUT</h4></Link>
+        <Link to="/work"><h4 className="font-nav-sm hover:text-[var(--color-secondary-blue)]">WORK</h4></Link>
+        <Link to="/newsletter"><h4 className="font-nav-sm hover:text-[var(--color-secondary-blue)]">NEWSLETTER</h4></Link>
+        <Link to="/contact"><h4 className="font-nav-sm hover:text-[var(--color-secondary-blue)]">CONTACT ME</h4></Link>
       </nav>
 
       {/* Mobile Hamburger */}

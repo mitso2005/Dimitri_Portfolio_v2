@@ -176,3 +176,11 @@ a:hover {
     transform: translateX(0);
   }
 }
+
+
+/* Responsive font sizes (Nav Bar) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .font-nav-sm {
+    font-size: 20px;
+  }
+}
