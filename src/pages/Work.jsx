@@ -1,16 +1,22 @@
 import React from 'react';
 import PageNav from '../components/PageNav.jsx';
 import Box from '../components/DraggableBox.jsx';
+import { FaReact, FaJava } from 'react-icons/fa';
+import { SiTailwindcss, SiJavascript, SiPython, SiMysql } from 'react-icons/si';
 
 export default function Work() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <PageNav />
-      <div className="absolute -translate-x-1/2">
-        <h2 className="whitespace-nowrap">Developer Work</h2>
-        <p>Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!</p>
+      <div className="text-center pt-10 pb-10 px-2">
+        <h2 className="font-h2-sm">Developer Work</h2>
+        <p>
+          Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!
+        </p>
       </div>
-      <Box />
+      <div className="flex-1 mx-10 mb-10">
+        <Box />
+      </div>
     </div>
   );
 }

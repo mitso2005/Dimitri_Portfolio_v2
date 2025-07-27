@@ -69,12 +69,12 @@ export default function DraggableBox() {
   }, [dragging, dragOffset]);
 
   return (
-    <div className="fixed inset-0 mt-100 mb-10 mr-10 ml-10">
-      {/* Spacer to ensure scrollable area below */}
-      <div
-        ref={containerRef}
-        className="fixed inset-0 mt-100 mb-10 mr-10 ml-10 border-2 border-black"
-      >
+  <div className="fixed left-10 right-10 bottom-10 top-60 md:top-80">
+    {/* Spacer to ensure scrollable area below */}
+    <div
+      ref={containerRef}
+      className="w-full h-full border-2 border-black relative"
+    >
         <div
           onMouseDown={onMouseDown}
           style={{
