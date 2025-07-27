@@ -1,6 +1,6 @@
 import React from 'react';
 import PageNav from '../components/PageNav.jsx';
-import Box from '../components/DraggableBox.jsx';
+import DraggableProjectCards from '../components/ProjectCard.jsx'; // Updated import
 import { FaReact, FaJava } from 'react-icons/fa';
 import { SiTailwindcss, SiJavascript, SiPython, SiMysql } from 'react-icons/si';
 
@@ -15,7 +15,7 @@ export default function Work() {
         </p>
       </div>
       <div className="flex-1 mx-10 mb-10">
-        <Box />
+        <DraggableProjectCards />
       </div>
     </div>
   );
