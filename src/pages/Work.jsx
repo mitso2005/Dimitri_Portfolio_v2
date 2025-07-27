@@ -6,8 +6,8 @@ export default function Work() {
   return (
     <div>
       <PageNav />
-      <div className="">
-        <h2 className="">Developer Work</h2>
+      <div className="absolute -translate-x-1/2">
+        <h2 className="whitespace-nowrap">Developer Work</h2>
         <p>Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!</p>
       </div>
       <Box />
