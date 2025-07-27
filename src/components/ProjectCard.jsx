@@ -62,8 +62,7 @@ function ProjectCard({ project, containerRef }) {
     const mouseX = e.clientX - containerRect.left;
     const mouseY = e.clientY - containerRect.top;
 
-    const boxWidth = 128;
-    const boxHeight = 128;
+    const { width: boxWidth, height: boxHeight } = getBoxSize();
 
     const newX = Math.min(
       Math.max(0, mouseX - dragOffset.x),
@@ -92,6 +91,22 @@ function ProjectCard({ project, containerRef }) {
     }
   };
 
+  // Responsive box size
+  const getBoxSize = () => {
+    if (window.matchMedia('(max-width: 640px)').matches) {
+      return { width: 200, height: 133 };
+    }
+    return { width: 300, height: 200 };
+  };
+
+  // Listen for resize to force re-render for box size
+  const [, forceUpdate] = useState(0);
+  useEffect(() => {
+    const handleResize = () => forceUpdate(x => x + 1);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     if (dragging) {
       document.addEventListener('mousemove', onMouseMove);
@@ -108,6 +123,8 @@ function ProjectCard({ project, containerRef }) {
     }
   }, [dragging, dragOffset]);
 
+  const { width: cardWidth, height: cardHeight } = getBoxSize();
+
   return (
     <div
       onMouseDown={onMouseDown}
@@ -117,11 +134,13 @@ function ProjectCard({ project, containerRef }) {
       style={{
         left: position.x,
         top: position.y,
+        width: cardWidth,
+        height: cardHeight,
         transform: dragging ? 'scale(1.05)' : 'scale(1)',
         transition: dragging ? 'none' : 'transform 0.2s ease',
       }}
       className={`
-        absolute w-32 h-32 rounded-xl shadow-lg select-none
+        absolute rounded-xl shadow-lg select-none
         ${dragging
           ? 'cursor-grabbing shadow-2xl'
           : 'cursor-grab hover:shadow-xl'
@@ -135,6 +154,7 @@ function ProjectCard({ project, containerRef }) {
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover rounded-xl pointer-events-none"
+          style={{ width: '100%', height: '100%' }}
         />
       ) : (
         // Info view (on hover)
