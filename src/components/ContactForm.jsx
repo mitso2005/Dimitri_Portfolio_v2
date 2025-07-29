@@ -69,7 +69,7 @@ const ContactForm = () => {
     };
 
     return (
-        <div>
+        <div className = 'w-full flex items-center justify-center mb-8 py-8 sm:py-12'>
             <div className="max-w-3xl w-full mx-4 p-4 sm:p-8 shadow-md rounded-lg"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <p className="text-sm sm:text-base mb-6">If you're a brand looking to collaborate, please send me an email using the form below.</p>

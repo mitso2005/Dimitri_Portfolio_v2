@@ -1,9 +1,16 @@
-import React, { useState } from 'react'; 
+import React, { useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/img/hero_image.svg';
 import HomeNav from '../components/HomeNav.jsx';
 
 export default function Home() {
+  React.useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <div>
       <HomeNav />
