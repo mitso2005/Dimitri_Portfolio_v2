@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 
 const ContactForm = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [company, setCompany] = useState('');
     const [topic, setTopic] = useState('');
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState('');
-    const [touched, setTouched] = useState({ email: false, topic: false, message: false });
+    const [touched, setTouched] = useState({ name: false, email: false, company: false, topic: false, message: false });
     const [errors, setErrors] = useState({});
 
     const validate = () => {
         const newErrors = {};
+        if (!name) newErrors.name = true;
         if (!email) newErrors.email = true;
         if (!topic) newErrors.topic = true;
         if (!message) newErrors.message = true;
+        // company is optional
         return newErrors;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = validate();
-        setTouched({ email: true, topic: true, message: true });
+        setTouched({ name: true, email: true, company: true, topic: true, message: true });
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length > 0) {
@@ -33,10 +37,12 @@ const ContactForm = () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             
             setStatus('success');
+            setName('');
             setEmail('');
+            setCompany('');
             setTopic('');
             setMessage('');
-            setTouched({ email: false, topic: false, message: false });
+            setTouched({ name: false, email: false, company: false, topic: false, message: false });
             setErrors({});
         } catch (error) {
             console.error('Error:', error);
@@ -51,32 +57,90 @@ const ContactForm = () => {
         
         return `absolute left-3 pointer-events-none transition-all duration-200 ease-in-out
             ${hasValue || document.activeElement?.name === field
-                ? '-top-2 text-xs bg-white px-1' 
-                : 'top-2 text-base'
+            ? '-top-2 text-xs bg-[var(--color-light)] px-1' 
+            : 'top-2 text-base'
             }
             ${hasError
-                ? 'text-red-500 font-semibold'
-                : hasValue || document.activeElement?.name === field
-                    ? 'text-gray-600'
-                    : 'text-gray-400'
+            ? 'text-red-500 font-semibold'
+            : hasValue || document.activeElement?.name === field
+                ? 'text-gray-600'
+                : 'text-gray-400'
             }`;
     };
 
     return (
-        <div className="bg-gray-100 w-full flex items-center justify-center mb-8 py-8 sm:py-12">
-            <div className="max-w-3xl w-full mx-4 p-4 sm:p-8 bg-white shadow-md rounded-lg">
+        <div>
+            <div className="max-w-3xl w-full mx-4 p-4 sm:p-8 shadow-md rounded-lg"
+                style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <p className="text-sm sm:text-base mb-6">If you're a brand looking to collaborate, please send me an email using the form below.</p>
                 {status === 'success' && (
-                    <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                    <div
+                        className="mb-4 p-3 border rounded"
+                        style={{
+                            background: 'rgba(173,204,238,0.25)', // faded primary blue
+                            borderColor: 'var(--color-secondary-blue)',
+                            color: 'var(--color-secondary-blue)'
+                        }}
+                    >
                         Message sent successfully!
                     </div>
                 )}
                 {status === 'error' && (
-                    <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    <div
+                        className="mb-4 p-3 border rounded"
+                        style={{
+                            background: 'rgba(255,219,228,0.25)', // faded primary pink
+                            borderColor: 'var(--color-primary-pink)',
+                            color: 'var(--color-primary-pink)'
+                        }}
+                    >
                         Failed to send message. Please try again.
                     </div>
                 )}
                 <div className="space-y-6">
+                    {/* Name & Company Fields Side by Side */}
+                    <div className="flex flex-col md:flex-row gap-4">
+                        {/* Name Field */}
+                        <div className="relative flex-1">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                                onBlur={() => setTouched(t => ({ ...t, name: true }))}
+                                required
+                                className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                                    errors.name && touched.name
+                                        ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
+                                        : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
+                                }`}
+                                style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
+                                autoComplete="off"
+                            />
+                            <label htmlFor="name" className={labelClass('name', name)}>
+                                Name*
+                            </label>
+                        </div>
+                        {/* Company Field */}
+                        <div className="relative flex-1">
+                            <input
+                                type="text"
+                                id="company"
+                                name="company"
+                                value={company}
+                                onChange={e => setCompany(e.target.value)}
+                                onBlur={() => setTouched(t => ({ ...t, company: true }))}
+                                className="w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue"
+                                style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
+                                autoComplete="on"
+                            />
+                            <label htmlFor="company" className={labelClass('company', company)}>
+                                Company
+                            </label>
+                        </div>
+                    </div>
+
                     {/* Email Field */}
                     <div className="relative">
                         <input
@@ -89,13 +153,14 @@ const ContactForm = () => {
                             required
                             className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.email && touched.email
-                                    ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
-                                    : 'border-gray-300 focus:ring-blue-200 focus:border-blue-500'
+                                    ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
+                                    : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
                             }`}
-                            autoComplete="off"
+                            style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
+                            autoComplete="on"
                         />
                         <label htmlFor="email" className={labelClass('email', email)}>
-                            Email Address
+                            Email Address*
                         </label>
                     </div>
 
@@ -111,13 +176,14 @@ const ContactForm = () => {
                             required
                             className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.topic && touched.topic
-                                    ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
-                                    : 'border-gray-300 focus:ring-blue-200 focus:border-blue-500'
+                                    ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
+                                    : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
                             }`}
+                            style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
                             autoComplete="off"
                         />
                         <label htmlFor="topic" className={labelClass('topic', topic)}>
-                            Topic
+                            Topic*
                         </label>
                     </div>
 
@@ -132,13 +198,14 @@ const ContactForm = () => {
                             required
                             className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 resize-vertical ${
                                 errors.message && touched.message
-                                    ? 'border-red-500 focus:ring-red-200 focus:border-red-500'
-                                    : 'border-gray-300 focus:ring-blue-200 focus:border-blue-500'
+                                    ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
+                                    : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
                             }`}
+                            style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
                             rows={4}
                         />
                         <label htmlFor="message" className={labelClass('message', message)}>
-                            Message
+                            Message*
                         </label>
                     </div>
 
@@ -146,11 +213,11 @@ const ContactForm = () => {
                         type="button" 
                         disabled={
                             status === 'sending' ||
-                            !email || !topic || !message
+                            !name || !email || !topic || !message
                         }
                         onClick={handleSubmit}
                         className={`btn-custom w-full${
-                            status === 'sending' || !email || !topic || !message ? ' inactive' : ''
+                            status === 'sending' || !name || !email || !topic || !message ? ' inactive' : ''
                         }`}
                     >
                         {status === 'sending' ? 'Sending...' : 'Send Inquiry'}
