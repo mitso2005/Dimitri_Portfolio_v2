@@ -70,9 +70,15 @@ const ContactForm = () => {
 
     return (
         <div className = 'w-full flex items-center justify-center mb-8 py-8 sm:py-12'>
-            <div className="max-w-3xl w-full mx-4 p-4 sm:p-8 shadow-md rounded-lg"
+            <div className="max-w-5xl w-full mx-4 p-4 sm:p-8 shadow-md rounded-lg"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
-                <p className="text-sm sm:text-base mb-6">If you're a brand looking to collaborate, please send me an email using the form below.</p>
+                <h2 className = "font-h2-sm font-h2-md">Collaborate with me!</h2>
+                <div className="flex flex-row justify-center items-center gap-4 md:gap-10 mb-3">
+                    <h4 className="font-h4-sm font-h4-md">30M+ Views</h4>
+                    <h4 className="font-h4-sm font-h4-md">Tech • Travel • Unilife</h4>
+                    <h4 className="font-h4-sm font-h4-md">7k+ Followers</h4>
+                </div>
+                <p className="text-sm sm:text-base mb-6">If you're looking to get more eyes to your brand, send me an email using the form below.</p>
                 {status === 'success' && (
                     <div
                         className="mb-4 p-3 border rounded"
@@ -97,9 +103,9 @@ const ContactForm = () => {
                         Failed to send message. Please try again.
                     </div>
                 )}
-                <div className="space-y-6">
+                <div className="space-y-2">
                     {/* Name & Company Fields Side by Side */}
-                    <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex flex-col md:flex-row gap-2">
                         {/* Name Field */}
                         <div className="relative flex-1">
                             <input

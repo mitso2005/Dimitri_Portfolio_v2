@@ -75,6 +75,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -196,6 +197,24 @@ a:hover {
 @media (max-width: 768px) {
   .font-h2-sm {
     font-size: 32px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .font-h2-md {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .font-h4-sm {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .font-h4-md {
+    font-size: 24px;
   }
 }
 
