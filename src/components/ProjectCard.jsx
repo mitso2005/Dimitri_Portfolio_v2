@@ -93,7 +93,7 @@ function ProjectCard({ project, containerRef }) {
 
   // Responsive box size
   const getBoxSize = () => {
-    if (window.matchMedia('(max-width: 640px)').matches) {
+    if (window.matchMedia('(max-width: 768px)').matches) {
       return { width: 200, height: 133 };
     }
     return { width: 300, height: 200 };
@@ -158,7 +158,7 @@ function ProjectCard({ project, containerRef }) {
         />
       ) : (
         // Info view (on hover)
-        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 text-white p-2 flex flex-col justify-between rounded-xl">
+        <div className="w-full h-full bg-gradient-to-br from-primary-blue to-primary-pink text-white p-2 flex flex-col justify-between rounded-xl">
           <div>
             <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
               {project.title}
@@ -208,6 +208,12 @@ export default function DraggableProjectCards() {
             containerRef={containerRef}
           />
         ))}
+        {/* Test button for .btn-custom */}
+        <div className="absolute left-4 bottom-4 z-50">
+          <button className="btn-custom" onClick={() => alert('Button clicked!')}>
+            Test Button
+          </button>
+        </div>
       </div>
     </div>
   );

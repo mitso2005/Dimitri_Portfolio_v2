@@ -191,3 +191,46 @@ a:hover {
   }
 }
 
+.btn-custom {
+  font-family: var(--font-junicode);
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 15px;
+  border: 2px solid var(--color-dark);
+  background: var(--color-primary-blue);
+  color: var(--color-dark);
+  padding: 0.1em 1.2em;
+  transition: 
+    background 0.2s, 
+    color 0.2s, 
+    border-color 0.2s,
+    opacity 0.2s;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-custom:hover:not(:disabled) {
+  background: var(--color-dark);
+  color: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+}
+
+.btn-custom:active:not(:disabled) {
+  background: var(--color-primary-pink);
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
+
+.btn-custom:disabled,
+.btn-custom.inactive {
+  background: var(--color-primary-blue);
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+

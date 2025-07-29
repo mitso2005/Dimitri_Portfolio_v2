@@ -3,6 +3,7 @@ import PageNav from '../components/PageNav.jsx';
 import DraggableProjectCards from '../components/ProjectCard.jsx'; // Updated import
 import { FaReact, FaJava } from 'react-icons/fa';
 import { SiTailwindcss, SiJavascript, SiPython, SiMysql } from 'react-icons/si';
+import heroImage from '../assets/img/hero_image.svg';
 
 export default function Work() {
   return (
@@ -17,6 +18,7 @@ export default function Work() {
       <div className="flex-1 mx-10 mb-10">
         <DraggableProjectCards />
       </div>
+      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-25" />
     </div>
   );
 }
