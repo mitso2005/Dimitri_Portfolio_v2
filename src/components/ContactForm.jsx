@@ -144,12 +144,13 @@ const ContactForm = () => {
 
                     <button 
                         type="button" 
-                        disabled={status === 'sending'}
+                        disabled={
+                            status === 'sending' ||
+                            !email || !topic || !message
+                        }
                         onClick={handleSubmit}
-                        className={`w-full py-3 px-4 rounded-md font-medium transition-colors duration-200 ${
-                            status === 'sending'
-                                ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-                                : 'bg-blue-600 hover:bg-blue-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+                        className={`btn-custom w-full${
+                            status === 'sending' || !email || !topic || !message ? ' inactive' : ''
                         }`}
                     >
                         {status === 'sending' ? 'Sending...' : 'Send Inquiry'}
