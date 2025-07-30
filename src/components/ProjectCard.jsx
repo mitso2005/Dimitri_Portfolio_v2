@@ -10,48 +10,48 @@ import resumeImage from '../assets/img/projects/resume.svg';
 const projectsData = [
   {
     id: 1,
-    title: "React Portfolio",
+    title: "This Website!",
     image: portfoliov2Image,
-    techStack: ["React JS", "Tailwind CSS", "Render"],
-    description: "A responsive portfolio website built with React and modern CSS techniques.",
-    date: "2024-01",
-    link: "https://github.com/yourusername/react-portfolio"
+    techStack: ["React JS", "Tailwind CSS", "Figma"],
+    description: "A responsive portfolio website built with React and Tailwind.",
+    date: "Jul. 2025",
+    link: "https://github.com/mitso2005/Dimitri_Portfolio_v2"
   },
   {
     id: 2,
-    title: "Java Spring API",
+    title: "My Old Portfolio",
     image: porfoliov1Image,
-    techStack: ["Java", "Spring Boot", "MySQL"],
+    techStack: ["React JS", "Tailwind CSS", "Render"],
     description: "RESTful API backend service with authentication and database integration.",
-    date: "2024-02",
-    link: "https://github.com/yourusername/spring-api"
+    date: "Mar. 2025",
+    link: "https://github.com/mitso2005/Dimitri_Portfolio_v1"
   },
   {
     id: 3,
-    title: "Python Data Analysis",
+    title: "Discover my other projects",
     image: githubImage,
-    techStack: ["Python", "Pandas", "Matplotlib"],
+    techStack: ["React JS", "React Native", "Python", "+More"],
     description: "Data visualization and analysis tool for processing large datasets.",
-    date: "2023-12",
-    link: "https://github.com/yourusername/data-analysis"
+    date: "",
+    link: "https://github.com/mitso2005"
   },
   {
     id: 4,
-    title: "Node.js Chat App",
+    title: "Web Developer @ YellaTerra",
     image: ytImage,
-    techStack: ["Node.js", "Socket.io", "Express"],
+    techStack: ["BigCommerce", "SEO", "HTML/CSS"],
     description: "A real-time chat application using websockets and Node.js.",
-    date: "2023-11",
-    link: "https://github.com/yourusername/node-chat-app"
+    date: "Apr. 2024 - Present",
+    link: "https://store.yellaterra.com.au/"
   },
   {
     id: 5,
-    title: "Vue E-Commerce",
+    title: "Front-End Engineer @ Cissa",
     image: cissaImage,
-    techStack: ["Vue", "Vuex", "Firebase"],
-    description: "An e-commerce platform built with Vue and Firebase backend.",
-    date: "2023-10",
-    link: "https://github.com/yourusername/vue-ecommerce"
+    techStack: ["React Native", "TypeScript", "Figma"],
+    description: "An e-commerce platform built with React Native and Firebase backend.",
+    date: "Mar. 2025 - Present",
+    link: "https://cissa.org.au/"
   },
   {
     id: 6,
@@ -69,11 +69,27 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   const [dragging, setDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const dragStartRef = useRef({ x: 0, y: 0 });
+  const dragDistanceRef = useRef(0);
+
+  // Detect if we're on mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.matchMedia('(pointer: coarse)').matches);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   const onMouseDown = (e) => {
     if (e.button !== 0) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
+    dragStartRef.current = { x: e.clientX, y: e.clientY };
+    dragDistanceRef.current = 0;
 
     setDragOffset({
       x: e.clientX - containerRect.left - position.x,
@@ -87,6 +103,10 @@ function ProjectCard({ project, containerRef, initialPosition }) {
 
   const onMouseMove = (e) => {
     if (!dragging) return;
+
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    dragDistanceRef.current = Math.sqrt(dx * dx + dy * dy);
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const mouseX = e.clientX - containerRect.left;
@@ -110,14 +130,28 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   };
 
   const onMouseUp = (e) => {
+    const wasDragging = dragging && dragDistanceRef.current > 5; // Consider it a drag if moved more than 5px
     setDragging(false);
+    
+    // Only toggle hover state on mobile if wasn't dragging
+    if (isMobile && !wasDragging) {
+      setIsHovered(!isHovered);
+    }
+    
     e.stopPropagation();
     e.preventDefault();
   };
 
-  const handleClick = (e) => {
-    if (!dragging) {
-      window.open(project.link, '_blank');
+  // Link handling function - only the h4 uses this now
+  const handleLinkClick = (e) => {
+    e.stopPropagation(); // Prevent card click handler from firing
+    window.open(project.link, '_blank');
+  };
+
+  // Separate hover state management for card flipping
+  const handleCardHover = (hovered) => {
+    if (!isMobile) {
+      setIsHovered(hovered);
     }
   };
 
@@ -158,9 +192,6 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   return (
     <div
       onMouseDown={onMouseDown}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
       style={{
         left: position.x,
         top: position.y,
@@ -181,6 +212,11 @@ function ProjectCard({ project, containerRef, initialPosition }) {
       {!isHovered ? (
         // Image view (default state)
         <div className="w-full h-full relative">
+          <div 
+            className="absolute w-full h-full z-0"
+            onMouseEnter={() => handleCardHover(true)}
+            onMouseLeave={() => handleCardHover(false)}
+          ></div>
           <img
             src={project.image}
             alt={project.title}
@@ -188,11 +224,11 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             style={{ width: '100%', height: '100%' }}
           />
           <div
-            className="absolute left-0 bottom-0 w-full bg-[var(--color-primary-blue)] bg-opacity-90 px-4 rounded-b-xl"
-            style={{ zIndex: 2 }}
+            className="absolute left-0 bottom-0 w-full bg-[var(--color-primary-blue)] bg-opacity-90 px-4 py-2 rounded-b-xl z-10"
+            onClick={handleLinkClick}
           >
             <h4
-              className="text-[var(--color-light)] text-left m-0"
+              className="text-[var(--color-light)] text-left m-0 cursor-pointer hover:text-[var(--color-secondary-blue)] transition-colors"
               style={{ fontSize: '14px' }}
             >
               {project.id === 6
@@ -205,7 +241,10 @@ function ProjectCard({ project, containerRef, initialPosition }) {
         </div>
       ) : (
         // Info view (on hover)
-        <div className="w-full h-full text-white p-2 flex flex-col justify-between rounded-xl bg-[var(--color-dark)]">
+        <div 
+          className="w-full h-full text-white p-2 flex flex-col justify-between rounded-xl bg-[var(--color-dark)]"
+          onMouseLeave={() => handleCardHover(false)}
+        >
           <div>
             <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
               {project.title}
