@@ -22,7 +22,7 @@ const ScrollingImages = ({ position = 'right', direction = 'down' }) => {
   const animationClass = direction === 'down' ? 'animate-scroll-vertical' : 'animate-scroll-vertical-reverse';
 
   return (
-    <div className={`fixed ${positionClass} top-0 w-48 h-screen overflow-hidden pointer-events-none`} style={{ zIndex: -1 }}>
+    <div className={`fixed ${positionClass} top-0 w-48 h-screen overflow-hidden pointer-events-none`} style={{ zIndex: 0 }}>
       <div className={animationClass}>
         {/* First set of images */}
         {images.map((image, index) => (

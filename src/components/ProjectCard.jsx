@@ -1,41 +1,71 @@
 import React, { useState, useEffect, useRef } from 'react';
+import cissaImage from '../assets/img/projects/cissa.svg';
+import githubImage from '../assets/img/projects/github.svg';
+import porfoliov1Image from '../assets/img/projects/portfolio_v1.svg';
+import portfoliov2Image from '../assets/img/projects/portfolio_v2.svg';
+import ytImage from '../assets/img/projects/yt.svg';
+import resumeImage from '../assets/img/projects/resume.svg';
 
 // Sample project data - replace with your actual projects
 const projectsData = [
   {
     id: 1,
     title: "React Portfolio",
-    image: "https://via.placeholder.com/128x128/3B82F6/FFFFFF?text=React",
-    techStack: ["React", "Tailwind CSS", "JavaScript"],
+    image: portfoliov2Image,
+    techStack: ["React JS", "Tailwind CSS", "Render"],
     description: "A responsive portfolio website built with React and modern CSS techniques.",
     date: "2024-01",
-    link: "https://github.com/yourusername/react-portfolio",
-    initialPosition: { x: 50, y: 50 }
+    link: "https://github.com/yourusername/react-portfolio"
   },
   {
     id: 2,
     title: "Java Spring API",
-    image: "https://via.placeholder.com/128x128/10B981/FFFFFF?text=Java",
+    image: porfoliov1Image,
     techStack: ["Java", "Spring Boot", "MySQL"],
     description: "RESTful API backend service with authentication and database integration.",
     date: "2024-02",
-    link: "https://github.com/yourusername/spring-api",
-    initialPosition: { x: 200, y: 150 }
+    link: "https://github.com/yourusername/spring-api"
   },
   {
     id: 3,
     title: "Python Data Analysis",
-    image: "https://via.placeholder.com/128x128/F59E0B/FFFFFF?text=Python",
+    image: githubImage,
     techStack: ["Python", "Pandas", "Matplotlib"],
     description: "Data visualization and analysis tool for processing large datasets.",
     date: "2023-12",
-    link: "https://github.com/yourusername/data-analysis",
-    initialPosition: { x: 100, y: 250 }
+    link: "https://github.com/yourusername/data-analysis"
+  },
+  {
+    id: 4,
+    title: "Node.js Chat App",
+    image: ytImage,
+    techStack: ["Node.js", "Socket.io", "Express"],
+    description: "A real-time chat application using websockets and Node.js.",
+    date: "2023-11",
+    link: "https://github.com/yourusername/node-chat-app"
+  },
+  {
+    id: 5,
+    title: "Vue E-Commerce",
+    image: cissaImage,
+    techStack: ["Vue", "Vuex", "Firebase"],
+    description: "An e-commerce platform built with Vue and Firebase backend.",
+    date: "2023-10",
+    link: "https://github.com/yourusername/vue-ecommerce"
+  },
+  {
+    id: 6,
+    title: "C# Game Engine",
+    image: resumeImage,
+    techStack: ["C#", ".NET", "MonoGame"],
+    description: "A simple 2D game engine built in C# using MonoGame.",
+    date: "2023-09",
+    link: "https://github.com/yourusername/csharp-game-engine"
   }
 ];
 
-function ProjectCard({ project, containerRef }) {
-  const [position, setPosition] = useState(project.initialPosition);
+function ProjectCard({ project, containerRef, initialPosition }) {
+  const [position, setPosition] = useState(initialPosition);
   const [dragging, setDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -93,10 +123,10 @@ function ProjectCard({ project, containerRef }) {
 
   // Responsive box size
   const getBoxSize = () => {
-    if (window.matchMedia('(max-width: 768px)').matches) {
-      return { width: 200, height: 133 };
+    if (project.id === 6) {
+      return { width: 182, height: 254 };
     }
-    return { width: 300, height: 200 };
+    return { width: 325, height: 176 };
   };
 
   // Listen for resize to force re-render for box size
@@ -194,6 +224,63 @@ function ProjectCard({ project, containerRef }) {
 
 export default function DraggableProjectCards() {
   const containerRef = useRef(null);
+  const [positions, setPositions] = useState(null);
+
+  // Helper to get card size for each project
+  const getBoxSize = (project) => {
+    if (project.id === 6) {
+      return { width: 182, height: 254 };
+    }
+    return { width: 325, height: 176 };
+  };
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+
+    // Generate random positions for each project
+    const newPositions = projectsData.map((project) => {
+      const { width, height } = getBoxSize(project);
+      const maxX = Math.max(0, containerWidth - width);
+      const maxY = Math.max(0, containerHeight - height);
+      return {
+        x: Math.floor(Math.random() * maxX),
+        y: Math.floor(Math.random() * maxY)
+      };
+    });
+    setPositions(newPositions);
+    // eslint-disable-next-line
+  }, [containerRef.current]);
+
+  // Re-randomize on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setPositions(null); // trigger re-randomization
+      setTimeout(() => {
+        if (containerRef.current) {
+          const containerRect = containerRef.current.getBoundingClientRect();
+          const containerWidth = containerRect.width;
+          const containerHeight = containerRect.height;
+          const newPositions = projectsData.map((project) => {
+            const { width, height } = getBoxSize(project);
+            const maxX = Math.max(0, containerWidth - width);
+            const maxY = Math.max(0, containerHeight - height);
+            return {
+              x: Math.floor(Math.random() * maxX),
+              y: Math.floor(Math.random() * maxY)
+            };
+          });
+          setPositions(newPositions);
+        }
+      }, 100);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="fixed left-10 right-10 bottom-10 top-60 md:top-80">
@@ -201,19 +288,15 @@ export default function DraggableProjectCards() {
         ref={containerRef}
         className="w-full h-full border-2 border-black relative"
       >
-        {projectsData.map((project) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            containerRef={containerRef}
-          />
-        ))}
-        {/* Test button for .btn-custom */}
-        <div className="absolute left-4 bottom-4 z-50">
-          <button className="btn-custom" onClick={() => alert('Button clicked!')}>
-            Test Button
-          </button>
-        </div>
+        {positions &&
+          projectsData.map((project, idx) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              containerRef={containerRef}
+              initialPosition={positions[idx]}
+            />
+          ))}
       </div>
     </div>
   );

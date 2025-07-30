@@ -1,0 +1,132 @@
+import React, { useState } from 'react';
+
+const NewsletterForm = () => {
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState('');
+    const [touched, setTouched] = useState({ email: false });
+    const [errors, setErrors] = useState({});
+
+    const validate = () => {
+        const newErrors = {};
+        if (!email) newErrors.email = true;
+        return newErrors;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newErrors = validate();
+        setTouched({ email: true });
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length > 0) {
+            setStatus('');
+            return;
+        }
+
+        setStatus('sending');
+        try {
+            // Simulating email subscription since we don't have a newsletter service configured
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            setStatus('success');
+            setEmail('');
+            setTouched({ email: false });
+            setErrors({});
+        } catch (error) {
+            console.error('Error:', error);
+            setStatus('error');
+        }
+    };
+
+    // Helper for label style with floating behavior
+    const labelClass = (field, value) => {
+        const hasValue = value.length > 0;
+        const hasError = errors[field] && touched[field];
+        
+        return `absolute left-3 pointer-events-none transition-all duration-200 ease-in-out
+            ${hasValue || document.activeElement?.name === field
+            ? '-top-2 text-xs bg-[var(--color-light)] px-1' 
+            : 'top-2 text-base'
+            }
+            ${hasError
+            ? 'text-red-500 font-semibold'
+            : hasValue || document.activeElement?.name === field
+                ? 'text-gray-600'
+                : 'text-gray-400'
+            }`;
+    };
+
+    return (
+        <div className = 'w-full flex items-center justify-center mb-8 py-8 sm:py-12'>
+            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-lg"
+                style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
+                <h2 className = "font-h2-sm font-h2-md">Stay Updated!</h2>
+                <p className="text-sm sm:text-base mb-6">Subscribe to my newsletter to get the latest tech news and free resources.</p>
+                {status === 'success' && (
+                    <div
+                        className="mb-4 p-3 border rounded"
+                        style={{
+                            background: 'rgba(173,204,238,0.25)', // faded primary blue
+                            borderColor: 'var(--color-secondary-blue)',
+                            color: 'var(--color-secondary-blue)'
+                        }}
+                    >
+                        Successfully subscribed to newsletter!
+                    </div>
+                )}
+                {status === 'error' && (
+                    <div
+                        className="mb-4 p-3 border rounded"
+                        style={{
+                            background: 'rgba(255,219,228,0.25)', // faded primary pink
+                            borderColor: 'var(--color-primary-pink)',
+                            color: 'var(--color-primary-pink)'
+                        }}
+                    >
+                        Failed to subscribe. Please try again.
+                    </div>
+                )}
+                <div className="space-y-2">
+                    {/* Email Field */}
+                    <div className="relative">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            onBlur={() => setTouched(t => ({ ...t, email: true }))}
+                            required
+                            className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                                errors.email && touched.email
+                                    ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
+                                    : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
+                            }`}
+                            style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
+                            autoComplete="on"
+                        />
+                        <label htmlFor="email" className={labelClass('email', email)}>
+                            Email Address*
+                        </label>
+                    </div>
+
+                    <button 
+                        type="button" 
+                        disabled={
+                            status === 'sending' ||
+                            !email
+                        }
+                        onClick={handleSubmit}
+                        className={`btn-custom w-full${
+                            status === 'sending' || !email ? ' inactive' : ''
+                        }`}
+                    >
+                        {status === 'sending' ? 'Subscribing...' : 'Subscribe to Newsletter'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default NewsletterForm;
