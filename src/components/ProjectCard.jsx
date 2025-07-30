@@ -180,15 +180,32 @@ function ProjectCard({ project, containerRef, initialPosition }) {
     >
       {!isHovered ? (
         // Image view (default state)
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover rounded-xl pointer-events-none"
-          style={{ width: '100%', height: '100%' }}
-        />
+        <div className="w-full h-full relative">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover rounded-xl pointer-events-none"
+            style={{ width: '100%', height: '100%' }}
+          />
+          <div
+            className="absolute left-0 bottom-0 w-full bg-[var(--color-primary-blue)] bg-opacity-90 px-4 rounded-b-xl"
+            style={{ zIndex: 2 }}
+          >
+            <h4
+              className="text-[var(--color-light)] text-left m-0"
+              style={{ fontSize: '14px' }}
+            >
+              {project.id === 6
+                ? "DOWNLOAD RESUME"
+                : project.id === 4 || project.id === 5
+                  ? "LINK TO WEBSITE \u2192"
+                  : "LINK TO GITHUB \u2192"}
+            </h4>
+          </div>
+        </div>
       ) : (
         // Info view (on hover)
-        <div className="w-full h-full bg-gradient-to-br from-primary-blue to-primary-pink text-white p-2 flex flex-col justify-between rounded-xl">
+        <div className="w-full h-full text-white p-2 flex flex-col justify-between rounded-xl bg-[var(--color-dark)]">
           <div>
             <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
               {project.title}
@@ -196,12 +213,12 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             <div className="text-xs mb-1 pointer-events-none">
               <div className="flex flex-wrap gap-1">
                 {project.techStack.slice(0, 2).map((tech, index) => (
-                  <span key={index} className="bg-white/20 px-1 py-0.5 rounded text-xs">
+                  <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
                     {tech}
                   </span>
                 ))}
                 {project.techStack.length > 2 && (
-                  <span className="bg-white/20 px-1 py-0.5 rounded text-xs">
+                  <span className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
                     +{project.techStack.length - 2}
                   </span>
                 )}
@@ -286,7 +303,7 @@ export default function DraggableProjectCards() {
     <div className="fixed left-10 right-10 bottom-10 top-60 md:top-80">
       <div
         ref={containerRef}
-        className="w-full h-full border-2 border-black relative"
+        className="w-full h-full border-2 border-black relative rounded-3xl"
       >
         {positions &&
           projectsData.map((project, idx) => (
