@@ -157,10 +157,11 @@ function ProjectCard({ project, containerRef, initialPosition }) {
 
   // Responsive box size
   const getBoxSize = () => {
+    // Adjust to include space for the link text below the image
     if (project.id === 6) {
-      return { width: 182, height: 254 };
+      return { width: 182, height: 254 + 40 }; // +40px for link area
     }
-    return { width: 325, height: 176 };
+    return { width: 325, height: 176 + 40 }; // +40px for link area
   };
 
   // Listen for resize to force re-render for box size
@@ -188,6 +189,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   }, [dragging, dragOffset]);
 
   const { width: cardWidth, height: cardHeight } = getBoxSize();
+  const imageHeight = project.id === 6 ? 254 : 176; // Original image height
 
   return (
     <div
@@ -207,73 +209,82 @@ function ProjectCard({ project, containerRef, initialPosition }) {
           : 'cursor-grab hover:shadow-xl'
         }
         transition-all duration-200 overflow-hidden
+        flex flex-col
       `}
     >
-      {!isHovered ? (
-        // Image view (default state)
-        <div className="w-full h-full relative">
-          <div 
-            className="absolute w-full h-full z-0"
-            onMouseEnter={() => handleCardHover(true)}
-            onMouseLeave={() => handleCardHover(false)}
-          ></div>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover rounded-xl pointer-events-none"
-            style={{ width: '100%', height: '100%' }}
-          />
-          <div
-            className="absolute left-0 bottom-0 w-full bg-[var(--color-primary-blue)] bg-opacity-90 px-4 py-2 rounded-b-xl z-10"
-            onClick={handleLinkClick}
-          >
-            <h4
-              className="text-[var(--color-light)] text-left m-0 cursor-pointer hover:text-[var(--color-secondary-blue)] transition-colors"
-              style={{ fontSize: '14px' }}
-            >
-              {project.id === 6
-                ? "DOWNLOAD RESUME"
-                : project.id === 4 || project.id === 5
-                  ? "LINK TO WEBSITE \u2192"
-                  : "LINK TO GITHUB \u2192"}
-            </h4>
+      {/* Upper part (image/info) that flips on hover */}
+      <div 
+        className="relative flex-1 overflow-hidden rounded-t-xl"
+        style={{ height: imageHeight }}
+      >
+        {!isHovered ? (
+          // Image view (default state)
+          <div className="w-full h-full relative">
+            <div 
+              className="absolute w-full h-full z-0"
+              onMouseEnter={() => handleCardHover(true)}
+              onMouseLeave={() => handleCardHover(false)}
+            ></div>
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover rounded-t-xl pointer-events-none"
+              style={{ width: '100%', height: '100%' }}
+            />
           </div>
-        </div>
-      ) : (
-        // Info view (on hover)
-        <div 
-          className="w-full h-full text-white p-2 flex flex-col justify-between rounded-xl bg-[var(--color-dark)]"
-          onMouseLeave={() => handleCardHover(false)}
-        >
-          <div>
-            <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
-              {project.title}
-            </h3>
-            <div className="text-xs mb-1 pointer-events-none">
-              <div className="flex flex-wrap gap-1">
-                {project.techStack.slice(0, 2).map((tech, index) => (
-                  <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
-                    {tech}
-                  </span>
-                ))}
-                {project.techStack.length > 2 && (
-                  <span className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
-                    +{project.techStack.length - 2}
-                  </span>
-                )}
+        ) : (
+          // Info view (on hover)
+          <div 
+            className="w-full h-full text-white p-2 flex flex-col justify-between rounded-t-xl bg-[var(--color-dark)]"
+            onMouseLeave={() => handleCardHover(false)}
+          >
+            <div>
+              <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
+                {project.title}
+              </h3>
+              <div className="text-xs mb-1 pointer-events-none">
+                <div className="flex flex-wrap gap-1">
+                  {project.techStack.slice(0, 2).map((tech, index) => (
+                    <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.techStack.length > 2 && (
+                    <span className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
+                      +{project.techStack.length - 2}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
+            <div>
+              <p className="text-xs mb-1 line-clamp-2 pointer-events-none">
+                {project.description}
+              </p>
+              <p className="text-xs opacity-75 pointer-events-none">
+                {project.date}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-xs mb-1 line-clamp-2 pointer-events-none">
-              {project.description}
-            </p>
-            <p className="text-xs opacity-75 pointer-events-none">
-              {project.date}
-            </p>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
+      
+      {/* Lower part (link) that's always visible */}
+      <div
+        className="bg-[var(--color-primary-blue)] bg-opacity-90 px-4 py-2 rounded-b-xl cursor-pointer hover:bg-opacity-100"
+        onClick={handleLinkClick}
+      >
+        <h4
+          className="text-[var(--color-light)] text-left m-0 cursor-pointer hover:text-[var(--color-secondary-blue)] transition-colors"
+          style={{ fontSize: '14px' }}
+        >
+          {project.id === 6
+            ? "DOWNLOAD RESUME"
+            : project.id === 4 || project.id === 5
+              ? "LINK TO WEBSITE \u2192"
+              : "LINK TO GITHUB \u2192"}
+        </h4>
+      </div>
     </div>
   );
 }
