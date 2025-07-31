@@ -1,25 +1,27 @@
 import React from 'react';
-import PageNav from '../components/PageNav.jsx';
-import DraggableProjectCards from '../components/ProjectCard.jsx'; // Updated import
-import { FaReact, FaJava } from 'react-icons/fa';
-import { SiTailwindcss, SiJavascript, SiPython, SiMysql } from 'react-icons/si';
+import Header from '../components/Header.jsx';
+import DraggableProjectCards from '../components/ProjectCard.jsx';
+import ContentContainer from '../components/ContentContainer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
 
 export default function Work() {
   return (
     <div className="min-h-screen flex flex-col">
-      <PageNav />
-      <div className = "content">
-        <div className="text-center pt-10 pb-10 px-2">
-          <h2 className="font-h2-sm">Developer Work</h2>
-          <p>
-            Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!
-          </p>
-        </div>
-        <div className="flex-1 mx-10 mb-10">
+      <Header />
+      
+      {/* Apply ContentContainer to title and description only */}
+      <ContentContainer>
+        <h2 className="text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          My Work
+        </h2>
+        <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
+          Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!
+        </p>
+        <div className="delay-300">
           <DraggableProjectCards />
         </div>
-      </div>
+      </ContentContainer>
+      
       <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-25" />
     </div>
   );

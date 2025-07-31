@@ -356,7 +356,7 @@ export default function DraggableProjectCards() {
   }, []);
 
   return (
-    <div className="fixed left-10 right-10 bottom-10 top-60 md:top-80">
+    <div className="fixed left-10 right-10 bottom-10 top-75">
       <div className="flex flex-col h-full">
         {/* Legend/Key for card colors */}
         <div className="flex justify-end mb-2 gap-4 pr-4">
