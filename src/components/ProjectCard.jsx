@@ -271,7 +271,13 @@ function ProjectCard({ project, containerRef, initialPosition }) {
       
       {/* Lower part (link) that's always visible */}
       <div
-        className="bg-[var(--color-primary-blue)] bg-opacity-90 px-4 py-2 rounded-b-xl cursor-pointer hover:bg-opacity-100"
+        className={`${
+          project.id === 6
+            ? "bg-[var(--color-dark)]"
+            : project.id === 4 || project.id === 5
+              ? "bg-[var(--color-primary-pink)]"
+              : "bg-[var(--color-primary-blue)]"
+        } bg-opacity-90 px-4 py-2 rounded-b-xl cursor-pointer hover:bg-opacity-100`}
         onClick={handleLinkClick}
       >
         <h4
@@ -351,19 +357,38 @@ export default function DraggableProjectCards() {
 
   return (
     <div className="fixed left-10 right-10 bottom-10 top-60 md:top-80">
-      <div
-        ref={containerRef}
-        className="w-full h-full border-2 border-black relative rounded-3xl"
-      >
-        {positions &&
-          projectsData.map((project, idx) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              containerRef={containerRef}
-              initialPosition={positions[idx]}
-            />
-          ))}
+      <div className="flex flex-col h-full">
+        {/* Legend/Key for card colors */}
+        <div className="flex justify-end mb-2 gap-4 pr-4">
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[var(--color-primary-blue)] mr-2 rounded"></div>
+            <span className="text-xs text-[var(--color-dark)]">Personal Projects</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[var(--color-primary-pink)] mr-2 rounded"></div>
+            <span className="text-xs text-[var(--color-dark)]">Work Experience</span>
+          </div>
+          <div className="flex items-center">
+            <div className="w-4 h-4 bg-[var(--color-dark)] mr-2 rounded"></div>
+            <span className="text-xs text-[var(--color-dark)]">Resume</span>
+          </div>
+        </div>
+        
+        {/* Cards container */}
+        <div
+          ref={containerRef}
+          className="w-full h-full border-2 border-black relative rounded-3xl flex-grow"
+        >
+          {positions &&
+            projectsData.map((project, idx) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                containerRef={containerRef}
+                initialPosition={positions[idx]}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
