@@ -57,10 +57,10 @@ const NewsletterForm = () => {
     };
 
     return (
-        <div className = 'w-full flex items-center justify-center mb-8 py-8 sm:py-12'>
+        <div className = 'w-full flex items-center justify-center mb-8'>
             <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-lg"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
-                <h2 className = "font-h2-sm font-h2-md">Stay Updated!</h2>
+                <h3 className = "">Stay Updated!</h3>
                 <p className="text-sm sm:text-base mb-6">Subscribe to my newsletter to get the latest tech news and free resources.</p>
                 {status === 'success' && (
                     <div
