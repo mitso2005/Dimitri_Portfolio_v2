@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const links = [
-  { to: "/about", defaultText: "HI", hoverText: "about" },
-  { to: "/work", defaultText: "MY", hoverText: "work" },
-  { to: "/newsletter", defaultText: "NAME'S", hoverText: "newsletter" },
-  { to: "/contact", defaultText: "DIMITRI", hoverText: "contact me" },
+  { to: "/about", defaultText: "HI", hoverText: "about", delay: "delay-300" },
+  { to: "/work", defaultText: "MY", hoverText: "work", delay: "delay-400" },
+  { to: "/newsletter", defaultText: "NAME'S", hoverText: "newsletter", delay: "delay-500" },
+  { to: "/contact", defaultText: "DIMITRI", hoverText: "contact me", delay: "delay-600" },
 ];
 
-function HoverLink({ to, defaultText, hoverText, className, isAutoHovered, onMouseEnter, onMouseLeave, isMobile }) {
+function HoverLink({ to, defaultText, hoverText, className, isAutoHovered, onMouseEnter, onMouseLeave, isMobile, delay }) {
   const [isHovered, setIsHovered] = useState(false);
   const showHover = isHovered || isAutoHovered;
 
@@ -25,7 +25,7 @@ function HoverLink({ to, defaultText, hoverText, className, isAutoHovered, onMou
   return (
     <Link
       to={to}
-      className={className}
+      className={`${className} fade-in-up ${delay}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -154,6 +154,7 @@ export default function HomeNav() {
               : !isMobile && activeIndex === idx
           }
           isMobile={isMobile}
+          delay={link.delay}
         />
       ))}
     </nav>

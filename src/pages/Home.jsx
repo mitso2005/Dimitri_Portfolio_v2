@@ -4,11 +4,14 @@ import heroImage from '../assets/img/hero_image.svg';
 import HomeNav from '../components/HomeNav.jsx';
 
 export default function Home() {
-
   return (
     <div>
       <HomeNav />
-      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image" />
+      <img 
+        src={heroImage} 
+        alt="Illustration of Dimitri" 
+        className="hero-image fade-in-up delay-100" 
+      />
     </div>
   );
 }
