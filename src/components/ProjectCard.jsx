@@ -7,6 +7,34 @@ import ytImage from '../assets/img/projects/yt.svg';
 import resumeImage from '../assets/img/projects/resume.svg';
 import resumePdf from '../assets/pdf/resume.pdf'; // Add this import for the PDF file
 
+// Define preset positions by screen size (small, medium, large)
+const presetPositions = {
+  small: [
+    { x: 10, y: 10 },     // Project 1
+    { x: 120, y: 180 },   // Project 2
+    { x: 20, y: 350 },    // Project 3
+    { x: 150, y: 50 },    // Project 4
+    { x: 30, y: 250 },    // Project 5
+    { x: 160, y: 450 }    // Project 6
+  ],
+  medium: [
+    { x: 50, y: 30 },     // Project 1
+    { x: 250, y: 200 },   // Project 2
+    { x: 80, y: 400 },    // Project 3
+    { x: 400, y: 80 },    // Project 4
+    { x: 150, y: 280 },   // Project 5
+    { x: 450, y: 350 }    // Project 6
+  ],
+  large: [
+    { x: 100, y: 50 },    // Project 1
+    { x: 500, y: 150 },   // Project 2
+    { x: 200, y: 350 },   // Project 3
+    { x: 700, y: 100 },   // Project 4
+    { x: 300, y: 250 },   // Project 5
+    { x: 600, y: 400 }    // Project 6
+  ]
+};
+
 // Sample project data - replace with your actual projects
 const projectsData = [
   {
@@ -202,6 +230,25 @@ function ProjectCard({ project, containerRef, initialPosition }) {
     }
   }, [dragging, dragOffset]);
 
+  // Add effect to adjust position when container size changes
+  useEffect(() => {
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const { width: boxWidth, height: boxHeight } = getBoxSize();
+      
+      // Make sure position stays within bounds
+      setPosition(prev => ({
+        x: Math.min(Math.max(0, prev.x), containerRect.width - boxWidth),
+        y: Math.min(Math.max(0, prev.y), containerRect.height - boxHeight)
+      }));
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [containerRef]);
+
   const { width: cardWidth, height: cardHeight } = getBoxSize();
   const imageHeight = project.id === 6 ? Math.round(254 * 1.1) : Math.round(176 * 1.1); // Original image height increased by 10%
 
@@ -330,8 +377,9 @@ function ProjectCard({ project, containerRef, initialPosition }) {
 export default function DraggableProjectCards() {
   const containerRef = useRef(null);
   const [positions, setPositions] = useState(null);
+  const [screenSize, setScreenSize] = useState('medium');
 
-  // Helper to get card size for each project - also increased by 30%
+  // Helper to get card size for each project
   const getBoxSize = (project) => {
     if (project.id === 6) {
       return { width: Math.round(182 * 1.1), height: Math.round(254 * 1.1) };
@@ -339,53 +387,80 @@ export default function DraggableProjectCards() {
     return { width: Math.round(325 * 1.1), height: Math.round(176 * 1.1) };
   };
 
+  // Determine screen size category
   useEffect(() => {
-    if (!containerRef.current) return;
+    const determineScreenSize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setScreenSize('small');
+      } else if (width < 1024) {
+        setScreenSize('medium');
+      } else {
+        setScreenSize('large');
+      }
+    };
+
+    determineScreenSize();
+    window.addEventListener('resize', determineScreenSize);
+    return () => window.removeEventListener('resize', determineScreenSize);
+  }, []);
+
+  // Initialize and adjust positions based on container size
+  useEffect(() => {
+    if (!containerRef.current || !screenSize) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const containerWidth = containerRect.width;
     const containerHeight = containerRect.height;
 
-    // Generate random positions for each project
-    const newPositions = projectsData.map((project) => {
+    // Adjust preset positions to fit container
+    const adjustedPositions = projectsData.map((project, index) => {
       const { width, height } = getBoxSize(project);
-      const maxX = Math.max(0, containerWidth - width);
-      const maxY = Math.max(0, containerHeight - height);
-      return {
-        x: Math.floor(Math.random() * maxX),
-        y: Math.floor(Math.random() * maxY)
-      };
+      const preset = presetPositions[screenSize][index];
+      
+      // Scale the position to the current container size
+      const scaleX = containerWidth / 1000; // Assuming presets are based on 1000px width
+      const scaleY = containerHeight / 800; // Assuming presets are based on 800px height
+      
+      // Ensure positions are within bounds
+      const x = Math.min(Math.max(0, preset.x * scaleX), containerWidth - width);
+      const y = Math.min(Math.max(0, preset.y * scaleY), containerHeight - height);
+      
+      return { x, y };
     });
-    setPositions(newPositions);
-    // eslint-disable-next-line
-  }, [containerRef.current]);
 
-  // Re-randomize on window resize
+    setPositions(adjustedPositions);
+  }, [containerRef.current, screenSize]);
+
+  // Update positions when screen size changes
   useEffect(() => {
     const handleResize = () => {
-      setPositions(null); // trigger re-randomization
-      setTimeout(() => {
-        if (containerRef.current) {
-          const containerRect = containerRef.current.getBoundingClientRect();
-          const containerWidth = containerRect.width;
-          const containerHeight = containerRect.height;
-          const newPositions = projectsData.map((project) => {
-            const { width, height } = getBoxSize(project);
-            const maxX = Math.max(0, containerWidth - width);
-            const maxY = Math.max(0, containerHeight - height);
-            return {
-              x: Math.floor(Math.random() * maxX),
-              y: Math.floor(Math.random() * maxY)
-            };
-          });
-          setPositions(newPositions);
-        }
-      }, 100);
+      if (!containerRef.current || !positions) return;
+      
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const containerWidth = containerRect.width;
+      const containerHeight = containerRect.height;
+
+      // Adjust current positions to ensure they're still in bounds
+      const adjustedPositions = projectsData.map((project, idx) => {
+        const { width, height } = getBoxSize(project);
+        const currentPos = positions[idx];
+        
+        if (!currentPos) return presetPositions[screenSize][idx]; // Fallback to preset
+        
+        // Ensure positions remain in bounds
+        return {
+          x: Math.min(Math.max(0, currentPos.x), containerWidth - width),
+          y: Math.min(Math.max(0, currentPos.y), containerHeight - height)
+        };
+      });
+
+      setPositions(adjustedPositions);
     };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-    // eslint-disable-next-line
-  }, []);
+  }, [positions, containerRef.current, screenSize]);
 
   return (
     <div className="fixed left-10 right-10 bottom-10 top-75">

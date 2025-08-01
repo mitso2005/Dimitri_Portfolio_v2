@@ -49,8 +49,8 @@ export default function About() {
         <h2 className="italic text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
           about
         </h2>
-        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2" style={{ opacity: 0.5 }}>
-          get to know a little more about me
+        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
+          get to know a little more about me"
         </p>
         
         <div className="text-left space-y-4 fade-in-up delay-300">
