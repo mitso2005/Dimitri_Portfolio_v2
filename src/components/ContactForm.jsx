@@ -6,7 +6,7 @@ const ContactForm = () => {
     const [company, setCompany] = useState('');
     const [topic, setTopic] = useState('');
     const [message, setMessage] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState(''); // '' | 'sending' | 'success' | 'error'
     const [touched, setTouched] = useState({ name: false, email: false, company: false, topic: false, message: false });
     const [errors, setErrors] = useState({});
 
@@ -22,6 +22,10 @@ const ContactForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Don't allow new submissions after success
+        if (status === 'success') return;
+        
         const newErrors = validate();
         setTouched({ name: true, email: true, company: true, topic: true, message: true });
         setErrors(newErrors);
@@ -37,13 +41,7 @@ const ContactForm = () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             
             setStatus('success');
-            setName('');
-            setEmail('');
-            setCompany('');
-            setTopic('');
-            setMessage('');
-            setTouched({ name: false, email: false, company: false, topic: false, message: false });
-            setErrors({});
+            // Keep form data to prevent editing after successful submission
         } catch (error) {
             console.error('Error:', error);
             setStatus('error');
@@ -69,28 +67,19 @@ const ContactForm = () => {
     };
 
     return (
-        <div className = 'w-full flex items-center justify-center mb-8 py-8'>
+        <div className='w-full flex items-center justify-center mb-8 py-8'>
             <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-lg"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
-                <h3 className = "">Collaborate with me!</h3>
+                <h3 className="">Collaborate with me!</h3>
                 <div className="flex flex-row justify-center items-center gap-4 md:gap-10 mb-3">
-                    <h4 className="font-h4-sm font-h4-md" >30M+ Views</h4>
+                    <h4 className="font-h4-sm font-h4-md">30M+ Views</h4>
                     <h4 className="font-h4-sm font-h4-md">Tech • Travel • Unilife</h4>
                     <h4 className="font-h4-sm font-h4-md">7k+ Followers</h4>
                 </div>
                 <p className="text-sm sm:text-base mb-6">If you're looking to get more eyes to your brand, send me an email using the form below.</p>
-                {status === 'success' && (
-                    <div
-                        className="mb-4 p-3 border rounded"
-                        style={{
-                            background: 'rgba(173,204,238,0.25)', // faded primary blue
-                            borderColor: 'var(--color-secondary-blue)',
-                            color: 'var(--color-secondary-blue)'
-                        }}
-                    >
-                        Message sent successfully!
-                    </div>
-                )}
+                
+                {/* Remove success message display */}
+                
                 {status === 'error' && (
                     <div
                         className="mb-4 p-3 border rounded"
@@ -103,6 +92,7 @@ const ContactForm = () => {
                         Failed to send message. Please try again.
                     </div>
                 )}
+                
                 <div className="space-y-2">
                     {/* Name & Company Fields Side by Side */}
                     <div className="flex flex-col md:flex-row gap-2">
@@ -219,14 +209,23 @@ const ContactForm = () => {
                         type="button" 
                         disabled={
                             status === 'sending' ||
+                            status === 'success' ||
                             !name || !email || !topic || !message
                         }
                         onClick={handleSubmit}
                         className={`btn-custom w-full${
-                            status === 'sending' || !name || !email || !topic || !message ? ' inactive' : ''
+                            status === 'sending' || !name || !email || !topic || !message 
+                              ? ' inactive' 
+                              : status === 'success' 
+                                ? ' active'
+                                : ''
                         }`}
                     >
-                        {status === 'sending' ? 'Sending...' : 'Send Inquiry'}
+                        {status === 'sending' 
+                          ? 'Sending...' 
+                          : status === 'success'
+                            ? 'Sent Successfully!'
+                            : 'Send Inquiry'}
                     </button>
                 </div>
             </div>

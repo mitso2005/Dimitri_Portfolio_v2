@@ -247,14 +247,14 @@ a:hover {
 }
 
 .btn-custom:active:not(:disabled) {
-  background: var(--color-primary-pink);
+  background: var(--color-primary-blue);
   color: var(--color-dark);
   border-color: var(--color-dark);
 }
 
 .btn-custom:disabled,
 .btn-custom.inactive {
-  background: var(--color-primary-blue);
+  background: var(--color-primary-pink);
   color: var(--color-dark);
   border-color: var(--color-dark);
   opacity: 0.6;
