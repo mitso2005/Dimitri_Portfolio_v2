@@ -17,7 +17,9 @@ export default function Work() {
         <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
           Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!
         </p>
-        <div className="delay-300">
+        
+        {/* Wrapper div with fade-in instead of fade-in-up to avoid position issues */}
+        <div className="fade-in delay-300 relative">
           <DraggableProjectCards />
         </div>
       </ContentContainer>

@@ -7,11 +7,13 @@ export default function Home() {
   return (
     <div>
       <HomeNav />
-      <img 
-        src={heroImage} 
-        alt="Illustration of Dimitri" 
-        className="hero-image fade-in-up delay-100" 
-      />
+      <div className="hero-image-container fade-in delay-100">
+        <img 
+          src={heroImage} 
+          alt="Illustration of Dimitri" 
+          className="hero-image" 
+        />
+      </div>
     </div>
   );
 }
