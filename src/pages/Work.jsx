@@ -11,10 +11,10 @@ export default function Work() {
       
       {/* Apply ContentContainer to title and description only */}
       <ContentContainer>
-        <h2 className="text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-          My Work
+        <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          work
         </h2>
-        <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
+        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
           Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!
         </p>
         

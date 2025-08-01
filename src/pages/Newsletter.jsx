@@ -10,10 +10,10 @@ export default function Newsletter() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <ContentContainer>
-        <h2 className="text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-          Newsletter
+        <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          newsletter
         </h2>
-        <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
+        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
           Get your free job and leetcode tracker!
         </p>
         

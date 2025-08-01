@@ -74,7 +74,7 @@ const ContactForm = () => {
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className = "">Collaborate with me!</h3>
                 <div className="flex flex-row justify-center items-center gap-4 md:gap-10 mb-3">
-                    <h4 className="font-h4-sm font-h4-md">30M+ Views</h4>
+                    <h4 className="font-h4-sm font-h4-md" >30M+ Views</h4>
                     <h4 className="font-h4-sm font-h4-md">Tech • Travel • Unilife</h4>
                     <h4 className="font-h4-sm font-h4-md">7k+ Followers</h4>
                 </div>

@@ -32,14 +32,12 @@ function Countdown() {
   }, []);
 
   return (
-    <div className="countdown">
-      <div className="countdown-timer">
-        <span>{gradCountdown.days} days </span>
-        <span>{gradCountdown.hours} hours </span>
-        <span>{gradCountdown.minutes} minutes </span>
-        <span>{gradCountdown.seconds} seconds </span>
-      </div>
-    </div>
+    <span className="inline-flex gap-1">
+      <span>{gradCountdown.days} days</span>
+      <span>{gradCountdown.hours} hours</span>
+      <span>{gradCountdown.minutes} minutes</span>
+      <span>{gradCountdown.seconds} seconds</span>
+    </span>
   );
 }
 
@@ -48,21 +46,32 @@ export default function About() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <ContentContainer>
-        <h2 className="text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-          About Me
+        <h2 className="italic text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          about
         </h2>
-        <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
-          Get to know a little more about me
+        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2" style={{ opacity: 0.5 }}>
+          get to know a little more about me
         </p>
         
         <div className="text-left space-y-4 fade-in-up delay-300">
           <p>
             Hi my name's Dimitri, I'm a passionate Software Developer and Tech Content Creator based out of Melbourne, Australia. 
-            I'm currently completing a Bachelor of Computing and Software Systems at The University of Melbourne. You should hire me in <Countdown /> when I graduate.
+          </p>
+
+          <p>
+            I'm currently completing a Bachelor of Computing and Software Systems at The University of Melbourne.
           </p>
           
           <p>
-            Right now I'm working as a Web Developer at Yella Terra
+            Right now I'm working as a Web Developer @ Yella Terra.
+          </p>
+
+          <p>
+            I'm also volenteering as a Full Stack Engineer for CISSA's (Computer and Information Systems Student Association) Projects Team.
+          </p>
+
+          <p>
+            You should hire me in <Countdown /> when I graduate.
           </p>
         </div>
       </ContentContainer>

@@ -14,7 +14,7 @@ const projectsData = [
     title: "This Website!",
     image: portfoliov2Image,
     techStack: ["React JS", "Tailwind CSS", "Figma"],
-    description: "A responsive portfolio built with React and Tailwind. Check out the github repo to see my full design document made with Figma!",
+    description: "Check out the github repo to see my full design document made with Figma!",
     date: "Jul. 2025",
     link: "https://github.com/mitso2005/Dimitri_Portfolio_v2"
   },
@@ -32,7 +32,7 @@ const projectsData = [
     title: "Github",
     image: githubImage,
     techStack: ["React JS", "React Native", "Python", "Ruby", "JavaScript"],
-    description: "Check out my other projects on GitHub!",
+    description: "Check out my other projects on GitHub. I'm currently learning Ruby on Rails and React Native.",
     date: "",
     link: "https://github.com/mitso2005"
   },
@@ -52,7 +52,7 @@ const projectsData = [
     image: cissaImage,
     company: "Computing and Information Systems Students Association (CISSA)",
     techStack: ["Ruby", "Rails", "Figma"],
-    description: "Building an author focused social media component for The Conversation's online news platform.",
+    description: "Building new components for The Conversation's online news platform.",
     date: "Mar. 2025 - Present",
     link: "https://cissa.org.au/"
   },
@@ -169,13 +169,13 @@ function ProjectCard({ project, containerRef, initialPosition }) {
     }
   };
 
-  // Responsive box size
+  // Responsive box size - increased by 30%
   const getBoxSize = () => {
     // Adjust to include space for the link text below the image
     if (project.id === 6) {
-      return { width: 182, height: 254 + 40 }; // +40px for link area
+      return { width: Math.round(182 * 1.1), height: Math.round(254 * 1.1) + 40 }; // +40px for link area
     }
-    return { width: 325, height: 176 + 40 }; // +40px for link area
+    return { width: Math.round(325 * 1.1), height: Math.round(176 * 1.1) + 40 }; // +40px for link area
   };
 
   // Listen for resize to force re-render for box size
@@ -203,7 +203,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   }, [dragging, dragOffset]);
 
   const { width: cardWidth, height: cardHeight } = getBoxSize();
-  const imageHeight = project.id === 6 ? 254 : 176; // Original image height
+  const imageHeight = project.id === 6 ? Math.round(254 * 1.1) : Math.round(176 * 1.1); // Original image height increased by 10%
 
   return (
     <div
@@ -253,22 +253,22 @@ function ProjectCard({ project, containerRef, initialPosition }) {
         ) : (
           // Info view (on hover) - only for non-resume cards
           <div 
-            className="w-full h-full text-white p-2 flex flex-col justify-between rounded-t-xl bg-[var(--color-dark)]"
+            className="w-full h-full text-[var(--color-light)] p-2 flex flex-col justify-between rounded-t-xl bg-[var(--color-dark)]"
             onMouseLeave={() => handleCardHover(false)}
           >
             <div>
-              <h4 className="pointer-events-none">
+              <h4 className="pointer-events-none ">
                 {project.title}
               </h4>
               {/* Optional company field */}
               {project.company && (
-                <p className="text-xs text-gray-300 mb-1 pointer-events-none">
+                <p className="text-xs text-[var(--color-light)] opacity-75 mb-1 pointer-events-none">
                   {project.company}
                 </p>
               )}
               <div className="text-xs mb-1 pointer-events-none">
                 <div className="flex flex-wrap gap-1">
-                  {project.techStack && project.techStack.slice(0, 2).map((tech, index) => (
+                  {project.techStack && project.techStack.slice(0, 3).map((tech, index) => (
                     <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
                       {tech}
                     </span>
@@ -283,7 +283,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             </div>
             <div>
               {project.description && (
-                <p className="text-xs mb-1 line-clamp-2 pointer-events-none">
+                <p className="text-left text-xs mb-1 line-clamp-3 pointer-events-none">
                   {project.description}
                 </p>
               )}
@@ -309,7 +309,11 @@ function ProjectCard({ project, containerRef, initialPosition }) {
         onClick={handleLinkClick}
       >
         <h4
-          className="text-[var(--color-light)] text-left m-0 cursor-pointer hover:text-[var(--color-secondary-blue)] transition-colors"
+          className={`${
+            project.id === 6
+              ? "text-[var(--color-light)]" 
+              : "text-[var(--color-dark)]"
+          } text-left m-0 cursor-pointer hover:text-[var(--color-secondary-blue)] transition-colors`}
           style={{ fontSize: '14px' }}
         >
           {project.id === 6
@@ -327,12 +331,12 @@ export default function DraggableProjectCards() {
   const containerRef = useRef(null);
   const [positions, setPositions] = useState(null);
 
-  // Helper to get card size for each project
+  // Helper to get card size for each project - also increased by 30%
   const getBoxSize = (project) => {
     if (project.id === 6) {
-      return { width: 182, height: 254 };
+      return { width: Math.round(182 * 1.1), height: Math.round(254 * 1.1) };
     }
-    return { width: 325, height: 176 };
+    return { width: Math.round(325 * 1.1), height: Math.round(176 * 1.1) };
   };
 
   useEffect(() => {

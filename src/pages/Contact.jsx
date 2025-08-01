@@ -9,10 +9,10 @@ export default function Contact() {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-primary-blue)' }}>
       <Header />
       <ContentContainer>
-        <h2 className="text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-          Contact
+        <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          contact
         </h2>
-        <p className="text-left text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2">
+        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
           Did you know I make content? Let's create something amazing together.
         </p>
         
