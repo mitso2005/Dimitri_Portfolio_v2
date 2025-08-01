@@ -14,6 +14,10 @@ const NewsletterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Don't allow new submissions after success
+        if (status === 'success') return;
+        
         const newErrors = validate();
         setTouched({ email: true });
         setErrors(newErrors);
@@ -29,9 +33,7 @@ const NewsletterForm = () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             
             setStatus('success');
-            setEmail('');
-            setTouched({ email: false });
-            setErrors({});
+            // Keep email value to prevent editing after successful subscription
         } catch (error) {
             console.error('Error:', error);
             setStatus('error');
@@ -62,18 +64,9 @@ const NewsletterForm = () => {
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className = "">Stay Updated!</h3>
                 <p className="text-sm sm:text-base mb-6">Subscribe to my newsletter to get the latest tech news and free resources.</p>
-                {status === 'success' && (
-                    <div
-                        className="mb-4 p-3 border rounded"
-                        style={{
-                            background: 'rgba(173,204,238,0.25)', // faded primary blue
-                            borderColor: 'var(--color-secondary-blue)',
-                            color: 'var(--color-secondary-blue)'
-                        }}
-                    >
-                        Successfully subscribed to newsletter!
-                    </div>
-                )}
+                
+                {/* Remove success message display */}
+                
                 {status === 'error' && (
                     <div
                         className="mb-4 p-3 border rounded"
@@ -86,6 +79,7 @@ const NewsletterForm = () => {
                         Failed to subscribe. Please try again.
                     </div>
                 )}
+                
                 <div className="space-y-2">
                     {/* Email Field */}
                     <div className="relative">
@@ -97,6 +91,7 @@ const NewsletterForm = () => {
                             onChange={e => setEmail(e.target.value)}
                             onBlur={() => setTouched(t => ({ ...t, email: true }))}
                             required
+                            disabled={status === 'success'}
                             className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.email && touched.email
                                     ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
@@ -114,14 +109,23 @@ const NewsletterForm = () => {
                         type="button" 
                         disabled={
                             status === 'sending' ||
+                            status === 'success' ||
                             !email
                         }
                         onClick={handleSubmit}
                         className={`btn-custom w-full${
-                            status === 'sending' || !email ? ' inactive' : ''
+                            status === 'sending' || !email 
+                              ? ' inactive' 
+                              : status === 'success' 
+                                ? ' active'
+                                : ''
                         }`}
                     >
-                        {status === 'sending' ? 'Subscribing...' : 'Subscribe to Newsletter'}
+                        {status === 'sending' 
+                          ? 'Subscribing...' 
+                          : status === 'success'
+                            ? 'Subscribed!'
+                            : 'Subscribe to Newsletter'}
                     </button>
                 </div>
             </div>
