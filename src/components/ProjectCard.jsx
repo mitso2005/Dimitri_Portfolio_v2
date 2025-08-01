@@ -5,6 +5,7 @@ import porfoliov1Image from '../assets/img/projects/portfolio_v1.svg';
 import portfoliov2Image from '../assets/img/projects/portfolio_v2.svg';
 import ytImage from '../assets/img/projects/yt.svg';
 import resumeImage from '../assets/img/projects/resume.svg';
+import resumePdf from '../assets/pdf/resume.pdf'; // Add this import for the PDF file
 
 // Sample project data - replace with your actual projects
 const projectsData = [
@@ -13,54 +14,53 @@ const projectsData = [
     title: "This Website!",
     image: portfoliov2Image,
     techStack: ["React JS", "Tailwind CSS", "Figma"],
-    description: "A responsive portfolio website built with React and Tailwind.",
+    description: "A responsive portfolio built with React and Tailwind. Check out the github repo to see my full design document made with Figma!",
     date: "Jul. 2025",
     link: "https://github.com/mitso2005/Dimitri_Portfolio_v2"
   },
   {
     id: 2,
-    title: "My Old Portfolio",
+    title: "My Old React Portfolio",
     image: porfoliov1Image,
-    techStack: ["React JS", "Tailwind CSS", "Render"],
-    description: "RESTful API backend service with authentication and database integration.",
+    techStack: ["React JS", "Tailwind CSS", "Email Js", "Render"],
+    description: "A modern, responsive portfolio template built with React, Tailwind, and EmailJS.",
     date: "Mar. 2025",
     link: "https://github.com/mitso2005/Dimitri_Portfolio_v1"
   },
   {
     id: 3,
-    title: "Discover my other projects",
+    title: "Github",
     image: githubImage,
-    techStack: ["React JS", "React Native", "Python", "+More"],
-    description: "Data visualization and analysis tool for processing large datasets.",
+    techStack: ["React JS", "React Native", "Python", "Ruby", "JavaScript"],
+    description: "Check out my other projects on GitHub!",
     date: "",
     link: "https://github.com/mitso2005"
   },
   {
     id: 4,
-    title: "Web Developer @ YellaTerra",
+    title: "Web Developer",
     image: ytImage,
+    company: "YellaTerra",
     techStack: ["BigCommerce", "SEO", "HTML/CSS"],
-    description: "A real-time chat application using websockets and Node.js.",
+    description: "Managing an e-commerce store with over 10k monthly visitors.",
     date: "Apr. 2024 - Present",
     link: "https://store.yellaterra.com.au/"
   },
   {
     id: 5,
-    title: "Front-End Engineer @ Cissa",
+    title: "Full Stack Engineer",
     image: cissaImage,
-    techStack: ["React Native", "TypeScript", "Figma"],
-    description: "An e-commerce platform built with React Native and Firebase backend.",
+    company: "Computing and Information Systems Students Association (CISSA)",
+    techStack: ["Ruby", "Rails", "Figma"],
+    description: "Building an author focused social media component for The Conversation's online news platform.",
     date: "Mar. 2025 - Present",
     link: "https://cissa.org.au/"
   },
   {
     id: 6,
-    title: "C# Game Engine",
+    title: "Resume",
     image: resumeImage,
-    techStack: ["C#", ".NET", "MonoGame"],
-    description: "A simple 2D game engine built in C# using MonoGame.",
-    date: "2023-09",
-    link: "https://github.com/yourusername/csharp-game-engine"
+    link: resumePdf // Update this to use the imported PDF file
   }
 ];
 
@@ -145,12 +145,26 @@ function ProjectCard({ project, containerRef, initialPosition }) {
   // Link handling function - only the h4 uses this now
   const handleLinkClick = (e) => {
     e.stopPropagation(); // Prevent card click handler from firing
-    window.open(project.link, '_blank');
+    
+    // Special handling for resume card
+    if (project.id === 6) {
+      // Create an anchor element and trigger download
+      const link = document.createElement('a');
+      link.href = project.link;
+      link.download = 'Dimitri_Petrakis_Resume.pdf'; // Name the downloaded file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      // For other cards, open in new tab as before
+      window.open(project.link, '_blank');
+    }
   };
 
   // Separate hover state management for card flipping
   const handleCardHover = (hovered) => {
-    if (!isMobile) {
+    // Don't allow flipping for the resume card (id 6)
+    if (!isMobile && project.id !== 6) {
       setIsHovered(hovered);
     }
   };
@@ -218,14 +232,17 @@ function ProjectCard({ project, containerRef, initialPosition }) {
         className="relative flex-1 overflow-hidden rounded-t-xl"
         style={{ height: imageHeight }}
       >
-        {!isHovered ? (
+        {/* For resume card or when not hovered */}
+        {(!isHovered || project.id === 6) ? (
           // Image view (default state)
           <div className="w-full h-full relative">
-            <div 
-              className="absolute w-full h-full z-0"
-              onMouseEnter={() => handleCardHover(true)}
-              onMouseLeave={() => handleCardHover(false)}
-            ></div>
+            {project.id !== 6 && (
+              <div 
+                className="absolute w-full h-full z-0"
+                onMouseEnter={() => handleCardHover(true)}
+                onMouseLeave={() => handleCardHover(false)}
+              ></div>
+            )}
             <img
               src={project.image}
               alt={project.title}
@@ -234,23 +251,29 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             />
           </div>
         ) : (
-          // Info view (on hover)
+          // Info view (on hover) - only for non-resume cards
           <div 
             className="w-full h-full text-white p-2 flex flex-col justify-between rounded-t-xl bg-[var(--color-dark)]"
             onMouseLeave={() => handleCardHover(false)}
           >
             <div>
-              <h3 className="text-xs font-bold mb-1 truncate pointer-events-none">
+              <h4 className="pointer-events-none">
                 {project.title}
-              </h3>
+              </h4>
+              {/* Optional company field */}
+              {project.company && (
+                <p className="text-xs text-gray-300 mb-1 pointer-events-none">
+                  {project.company}
+                </p>
+              )}
               <div className="text-xs mb-1 pointer-events-none">
                 <div className="flex flex-wrap gap-1">
-                  {project.techStack.slice(0, 2).map((tech, index) => (
+                  {project.techStack && project.techStack.slice(0, 2).map((tech, index) => (
                     <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
                       {tech}
                     </span>
                   ))}
-                  {project.techStack.length > 2 && (
+                  {project.techStack && project.techStack.length > 2 && (
                     <span className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
                       +{project.techStack.length - 2}
                     </span>
@@ -259,12 +282,16 @@ function ProjectCard({ project, containerRef, initialPosition }) {
               </div>
             </div>
             <div>
-              <p className="text-xs mb-1 line-clamp-2 pointer-events-none">
-                {project.description}
-              </p>
-              <p className="text-xs opacity-75 pointer-events-none">
-                {project.date}
-              </p>
+              {project.description && (
+                <p className="text-xs mb-1 line-clamp-2 pointer-events-none">
+                  {project.description}
+                </p>
+              )}
+              {project.date && (
+                <p className="text-xs opacity-75 pointer-events-none">
+                  {project.date}
+                </p>
+              )}
             </div>
           </div>
         )}
