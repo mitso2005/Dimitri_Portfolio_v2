@@ -21,9 +21,9 @@ export default function Contact() {
         </div>
       </ContentContainer>
       
-      {/* ScrollingImages components outside the ContentContainer */}
-      <ScrollingImages position="left" direction="up" />
-      <ScrollingImages position="right" direction="down" />
+      {/* ScrollingImages with reduced opacity */}
+      <ScrollingImages position="left" direction="down" opacity={0.3} />
+      <ScrollingImages position="right" direction="up" opacity={0.3} />
     </div>
   );
 }

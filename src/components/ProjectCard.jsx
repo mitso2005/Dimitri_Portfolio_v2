@@ -201,6 +201,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
         height: cardHeight,
         transform: dragging ? 'scale(1.05)' : 'scale(1)',
         transition: dragging ? 'none' : 'transform 0.2s ease',
+        zIndex: dragging ? 50 : 1, // Increase z-index when dragging to bring to front
       }}
       className={`
         absolute rounded-xl shadow-lg select-none
