@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendNewsletterSubscription } from '../utils/emailService';
 
 const NewsletterForm = () => {
     const [email, setEmail] = useState('');
@@ -29,8 +30,14 @@ const NewsletterForm = () => {
 
         setStatus('sending');
         try {
-            // Simulating email subscription since we don't have a newsletter service configured
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Prepare form data for newsletter subscription
+            const formData = {
+                email,
+                subscribe_date: new Date().toISOString()
+            };
+
+            // Send email using EmailJS
+            await sendNewsletterSubscription(formData);
             
             setStatus('success');
             // Keep email value to prevent editing after successful subscription

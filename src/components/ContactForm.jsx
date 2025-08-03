@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendContactEmail } from '../utils/emailService';
 
 const ContactForm = () => {
     const [name, setName] = useState('');
@@ -37,8 +38,17 @@ const ContactForm = () => {
 
         setStatus('sending');
         try {
-            // Simulating email send since we don't have emailjs configured
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Prepare form data
+            const formData = {
+                name,
+                email,
+                company: company || 'N/A',
+                topic,
+                message
+            };
+
+            // Send email using EmailJS
+            await sendContactEmail(formData);
             
             setStatus('success');
             // Keep form data to prevent editing after successful submission

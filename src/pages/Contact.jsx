@@ -21,11 +21,11 @@ export default function Contact() {
           <ContactForm />
         </div>
       </ContentContainer>
-      
-      {/* ScrollingImages with reduced opacity */}
-      <ScrollingImages position="left" direction="down" opacity={0.25} />
-      <ScrollingImages position="right" direction="up" opacity={0.25} />
-
+      <div className="fade-in delay-400">
+        {/* ScrollingImages with reduced opacity */}
+        <ScrollingImages position="left" direction="down" opacity={0.25} />
+        <ScrollingImages position="right" direction="up" opacity={0.25} />
+      </div>
       <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-0" />
     </div>
   );
