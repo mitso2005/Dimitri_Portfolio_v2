@@ -3,10 +3,11 @@ import Header from '../components/Header.jsx';
 import ContactForm from '../components/ContactForm.jsx';
 import ScrollingImages from '../components/ScrollingImages.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
+import heroImage from '../assets/img/hero_image.svg';
 
 export default function Contact() {
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-primary-blue)' }}>
+    <div className="min-h-screen flex flex-col" >
       <Header />
       <ContentContainer>
         <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
@@ -22,8 +23,10 @@ export default function Contact() {
       </ContentContainer>
       
       {/* ScrollingImages with reduced opacity */}
-      <ScrollingImages position="left" direction="down" opacity={0.3} />
-      <ScrollingImages position="right" direction="up" opacity={0.3} />
+      <ScrollingImages position="left" direction="down" opacity={0.25} />
+      <ScrollingImages position="right" direction="up" opacity={0.25} />
+
+      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-0" />
     </div>
   );
 }

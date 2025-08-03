@@ -18,15 +18,15 @@ const presetPositions = {
     { x: 160, y: 450 }    // Project 6
   ],
   medium: [
-    { x: 50, y: 30 },     // Project 1
-    { x: 250, y: 200 },   // Project 2
+    { x: 50, y: 50 },     // Project 1
+    { x: 500, y: 400 },   // Project 2
     { x: 80, y: 400 },    // Project 3
     { x: 400, y: 80 },    // Project 4
     { x: 150, y: 280 },   // Project 5
     { x: 450, y: 350 }    // Project 6
   ],
   large: [
-    { x: 100, y: 50 },    // Project 1
+    { x: 100, y: 0 },    // Project 1
     { x: 500, y: 150 },   // Project 2
     { x: 200, y: 350 },   // Project 3
     { x: 700, y: 100 },   // Project 4

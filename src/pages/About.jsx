@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header.jsx';
 import heroImage from '../assets/img/hero_image.svg';
 import ContentContainer from '../components/ContentContainer.jsx';
+import AboutImg from '../assets/img/about_image_compress.jpg';
 
 function Countdown() {
   const [gradCountdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -73,9 +74,11 @@ export default function About() {
           <p>
             You should hire me in <Countdown /> when I graduate.
           </p>
+
+          <img src={AboutImg} alt="Dimitri Petrakis" className="rounded-lg shadow-lg mt-16 w-full sm:w-4/5 mx-auto fade-in-up delay-400" />
         </div>
       </ContentContainer>
-      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-25" />
+      
     </div>
   );
 }
