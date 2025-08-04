@@ -90,22 +90,22 @@ export default function About() {
           </p>
 
           {/* Image with caption - different behavior for mobile vs desktop */}
-          <div className="mt-16 w-full sm:w-4/5 mx-auto fade-in-up delay-400">
+          <div className="mt-16 w-full sm:w-4/5 mx-auto rounded-[15px] fade-in-up delay-400">
             {!isMobile ? (
               /* Desktop: hover effect with overlay caption */
-              <div 
-                className="relative cursor-pointer rounded-lg overflow-hidden"
+              <div
+                className="relative cursor-pointer rounded-[15px] overflow-hidden"
                 onMouseEnter={() => setImageHovered(true)}
                 onMouseLeave={() => setImageHovered(false)}
               >
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 
-                  className={`rounded-lg shadow-lg w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                  className={`rounded-[15px] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
                 />
                 {imageHovered && (
                   <div className="absolute inset-0 flex items-center justify-center text-center">
-                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50">
+                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50 rounded-[15px]">
                       Me in Ioannina, Greece!
                     </p>
                   </div>
@@ -117,7 +117,7 @@ export default function About() {
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 
-                  className="rounded-lg shadow-lg w-full"
+                  className="rounded-[15px] shadow-[15px] w-full"
                 />
                 <p className="text-center italic">
                   Me in Ioannina, Greece!

@@ -3,7 +3,7 @@ import Header from '../components/Header.jsx';
 import DraggableProjectCards from '../components/ProjectCard.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
-import ScrollableProjectList from '../components/ScrollableProjectList.jsx'; // New component
+import ScrollableProjectList from '../components/ScrollableProjectList.jsx'; 
 
 export default function Work() {
   const [viewMode, setViewMode] = useState('draggable'); // 'draggable' or 'scrollable'
@@ -30,37 +30,18 @@ export default function Work() {
             </p>
           </div>
           
-          {/* Toggle button */}
+          {/* Toggle button with text styled as paragraph */}
           <button 
             onClick={toggleViewMode}
-            className="bg-[var(--color-primary-blue)] text-[var(--color-dark)] rounded-[15px] px-4 py-2 
-                      border-2 border-[var(--color-dark)] transition-all hover:bg-[var(--color-dark)] 
-                      hover:text-[var(--color-primary-blue)] fade-in delay-300 flex items-center"
+            className={`btn-custom fade-in delay-300 ${
+              viewMode === 'draggable' 
+                ? 'bg-[var(--color-primary-pink)]' 
+                : 'bg-[var(--color-primary-blue)]'
+            }`}
           >
-            <span className="mr-2 font-medium">
+            <p className="italic text-xs sm:text-sm m-0">
               {viewMode === 'draggable' ? 'List View' : 'Card View'}
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {viewMode === 'draggable' ? (
-                // List icon
-                <>
-                  <line x1="8" y1="6" x2="21" y2="6"></line>
-                  <line x1="8" y1="12" x2="21" y2="12"></line>
-                  <line x1="8" y1="18" x2="21" y2="18"></line>
-                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                </>
-              ) : (
-                // Grid icon
-                <>
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                </>
-              )}
-            </svg>
+            </p>
           </button>
         </div>
         

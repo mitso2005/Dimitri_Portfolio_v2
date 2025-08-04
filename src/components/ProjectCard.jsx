@@ -378,6 +378,7 @@ export default function DraggableProjectCards() {
   const containerRef = useRef(null);
   const [positions, setPositions] = useState(null);
   const [screenSize, setScreenSize] = useState('medium');
+  const [showPopup, setShowPopup] = useState(true); // Start with popup visible
 
   // Helper to get card size for each project
   const getBoxSize = (project) => {
@@ -495,6 +496,33 @@ export default function DraggableProjectCards() {
                 initialPosition={positions[idx]}
               />
             ))}
+            
+          {/* Instructions popup */}
+          {showPopup && (
+            <div className="absolute inset-0 flex items-center justify-center z-50">
+              <div 
+                className="p-4 shadow-md rounded-[15px] max-w-xs text-center"
+                style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <div className="w-1"></div> {/* Spacer to center heading */}
+                  <button 
+                    onClick={() => setShowPopup(false)}
+                    className="text-[var(--color-dark)] hover:text-[var(--color-secondary-blue)] transition-colors"
+                    aria-label="Close"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+                <p className="mb-2">
+                  Hover, Drag and Click to learn more!
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
