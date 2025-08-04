@@ -33,7 +33,7 @@ function Countdown() {
   }, []);
 
   return (
-    <span className="inline-flex gap-1">
+    <span className="countdown inline-flex gap-1">
       <span>{gradCountdown.days} days</span>
       <span>{gradCountdown.hours} hours</span>
       <span>{gradCountdown.minutes} minutes</span>
@@ -86,7 +86,7 @@ export default function About() {
           </p>
 
           <p>
-            You should hire me in <Countdown /> when I graduate.
+            You should hire me in <Countdown /> <br /> when I graduate.
           </p>
 
           {/* Image with caption - different behavior for mobile vs desktop */}
@@ -105,8 +105,8 @@ export default function About() {
                 />
                 {imageHovered && (
                   <div className="absolute inset-0 flex items-center justify-center text-center">
-                    <p className="text-white text-lg font-medium px-4 py-2 bg-black/50 rounded-lg">
-                      This is me in Ioannina, Greece!
+                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50">
+                      Me in Ioannina, Greece!
                     </p>
                   </div>
                 )}
@@ -119,9 +119,9 @@ export default function About() {
                   alt="Dimitri Petrakis" 
                   className="rounded-lg shadow-lg w-full"
                 />
-                <figcaption className="text-center text-sm italic">
-                  This is me in Ioannina, Greece!
-                </figcaption>
+                <p className="text-center italic">
+                  Me in Ioannina, Greece!
+                </p>
               </figure>
             )}
           </div>

@@ -102,7 +102,7 @@ const NewsletterForm = () => {
                             />
                             {imageHovered && (
                                 <div className="absolute inset-0 flex items-center justify-center text-center">
-                                    <p className="text-white text-lg font-medium px-4 py-2 bg-black/50 rounded-lg">
+                                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50">
                                         Free Notion template with your subscription!
                                     </p>
                                 </div>
@@ -116,9 +116,9 @@ const NewsletterForm = () => {
                                 alt="Notion Tool" 
                                 className="rounded-[15px] shadow-[15px] w-full"
                             />
-                            <figcaption className="text-center text-sm italic">
+                            <p className="text-centeritalic">
                                 Free Notion template with your subscription!
-                            </figcaption>
+                            </p>
                         </figure>
                     )}
                 </div>
