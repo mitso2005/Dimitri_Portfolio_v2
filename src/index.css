@@ -223,7 +223,7 @@ a:hover {
   }
 }
 
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (min-width: 768px) {
   .font-h4-md {
     font-size: 24px;
   }
