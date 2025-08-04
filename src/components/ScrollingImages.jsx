@@ -42,7 +42,13 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
   return (
     <div 
       className={`fixed ${positionClass} top-0 ${containerWidth} h-screen overflow-hidden pointer-events-none`} 
-      style={{ zIndex: 0, opacity: opacity }}
+      style={{ 
+        zIndex: 0, 
+        opacity: opacity,
+        // Add mask image gradient for top and bottom fade effects
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 90%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 90%, transparent 100%)'
+      }}
     >
       <div className={animationClass}>
         {/* First set of images */}

@@ -63,13 +63,14 @@ const projectsData = [
     description: "Check out my other projects on GitHub. I'm currently learning Ruby on Rails and React Native.",
     date: "",
     year: null, // No specific year
-    type: "project",
+    type: "other",
     link: "https://github.com/mitso2005"
   },
   {
     id: 6,
     title: "Resume",
     image: resumeImage,
+    description: "Download my resume to learn more about my skills and experience.",
     year: null, // No specific year
     type: "other",
     link: resumePdf
@@ -134,7 +135,7 @@ const ProjectListItem = ({ project }) => {
 
   return (
     <div 
-      className="flex flex-col gap-4 p-4 hover:bg-white/10 rounded-[15px] cursor-pointer transition-all"
+      className="flex flex-col gap-4 p-4 hover:bg-[var(--color-light)]/10 rounded-[15px] cursor-pointer transition-all"
       onClick={handleClick}
     >
       {/* Changed layout to always be column (stacked) on both mobile and desktop */}
@@ -145,7 +146,7 @@ const ProjectListItem = ({ project }) => {
           className="w-full h-48 object-cover rounded-[15px]" // Fixed height for consistent landscape format
         />
       </div>
-      <div className="w-full">
+      <div className="w-full text-left">
         <h4 className="font-semibold text-lg">{project.title}</h4>
         {project.company && (
           <p className="text-sm opacity-75 mb-2">{project.company}</p>
@@ -249,13 +250,19 @@ const ScrollableProjectList = () => {
     <div className="w-full h-full">
       <div 
         ref={scrollRef}
-        className="project-scroll-container max-w-3xl mx-auto h-[calc(100vh-240px)] overflow-y-auto custom-scrollbar mt-8"
+        className="project-scroll-container max-w-3xl mx-auto overflow-y-auto custom-scrollbar mt-8"
+        style={{ 
+          height: 'calc(100vh - 240px - 40px)', // Subtract additional 40px from the bottom
+          paddingBottom: '40px', // Add padding to create space at the bottom
+          maskImage: 'linear-gradient(to bottom, black calc(100% - 80px), transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black calc(100% - 80px), transparent 100%)'
+        }}
       >
         {/* Header fade at top */}
         <div className="sticky top-0 bg-gradient-to-b from-[var(--color-light)] to-transparent h-10 z-10 fade-scroll-header-top" />
 
         {/* Work Experience Section */}
-        <div className="mb-10">
+        <div className="mb-10 text-left">
           <h3 className="text-2xl font-semibold mb-4 text-[var(--color-dark)]">Work Experience</h3>
           
           {Object.entries(workExperienceByYear)
@@ -277,7 +284,7 @@ const ScrollableProjectList = () => {
         </div>
 
         {/* Projects Section */}
-        <div className="mb-10">
+        <div className="mb-10 text-left">
           <h3 className="text-2xl font-semibold mb-4 text-[var(--color-dark)]">Projects</h3>
           
           {Object.entries(projectsByYear)
@@ -304,7 +311,7 @@ const ScrollableProjectList = () => {
 
         {/* Others Section (e.g., Resume) */}
         {others.length > 0 && (
-          <div className="mb-10">
+          <div className="mb-10 text-left">
             <h3 className="text-2xl font-semibold mb-4 text-[var(--color-dark)]">Other</h3>
             <div className="space-y-4">
               {others.map(item => (
@@ -316,11 +323,8 @@ const ScrollableProjectList = () => {
           </div>
         )}
 
-        {/* Add padding at the bottom for better scrolling experience */}
-        <div className="h-20"></div>
-        
-        {/* Header fade at bottom */}
-        <div className="sticky bottom-0 bg-gradient-to-t from-[var(--color-light)] to-transparent h-10 z-10 fade-scroll-header-bottom" />
+        {/* Add extra padding at the bottom for better scrolling experience */}
+        <div className="h-40"></div> {/* Increased from h-20 to h-40 */}
       </div>
     </div>
   );

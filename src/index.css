@@ -395,9 +395,15 @@ a:hover {
   border-radius: 10px;
 }
 
+/* Ensure the scrollbar doesn't go all the way to the bottom */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary-blue) transparent;
+}
+
+/* This ensures the scrollbar has bottom padding too */
+.custom-scrollbar::-webkit-scrollbar-track {
+  margin-bottom: 40px;
 }
 
 /* Add smooth transitions for scroll fade effects */

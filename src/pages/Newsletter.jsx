@@ -18,7 +18,7 @@ export default function Newsletter() {
         
         <div className="fade-in-up delay-300 space-y-6 flex flex-col items-center mb-4 pb-4">
           <div className="w-full max-w-4xl mx-auto">
-            <h3 className="text-left text-2xl mb-4">
+            <h3 className="text-left text-2xl mb-4 -semibold">
               Free Job and Leetcode Tracker!
             </h3>
             <p className="text-left mb-4">

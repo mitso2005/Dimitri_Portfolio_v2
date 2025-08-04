@@ -13,7 +13,7 @@ export default function Contact() {
         <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
           contact
         </h2>
-        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
+        <p className="text-left italic text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
           Did you know I make content? Let's create something amazing together.
         </p>
         
@@ -23,8 +23,8 @@ export default function Contact() {
       </ContentContainer>
       <div className="fade-in delay-400">
         {/* ScrollingImages with reduced opacity */}
-        <ScrollingImages position="left" direction="down" opacity={0.25} />
-        <ScrollingImages position="right" direction="up" opacity={0.25} />
+        <ScrollingImages position="left" direction="down" opacity={0.3} />
+        <ScrollingImages position="right" direction="up" opacity={0.3} />
       </div>
       <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-0" />
     </div>
