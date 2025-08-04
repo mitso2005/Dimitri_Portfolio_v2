@@ -380,3 +380,33 @@ a:hover {
   font-weight: 700;
   color: var(--color-secondary-blue);
 }
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-blue);
+  border-radius: 10px;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-blue) transparent;
+}
+
+/* Add smooth transitions for scroll fade effects */
+.fade-scroll-item {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Project scroll container specific styles */
+.project-scroll-container {
+  border-radius: 15px;
+  padding: 0 20px;
+}
