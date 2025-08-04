@@ -466,21 +466,6 @@ export default function DraggableProjectCards() {
   return (
     <div className="fixed left-10 right-10 bottom-10 top-75">
       <div className="flex flex-col h-full">
-        {/* Legend/Key for card colors */}
-        <div className="flex justify-end mb-2 gap-4 pr-4">
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-[var(--color-primary-blue)] mr-2 rounded"></div>
-            <p>Personal Projects</p>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-[var(--color-primary-pink)] mr-2 rounded"></div>
-            <p>Work Experience</p>
-          </div>
-          <div className="flex items-center">
-            <div className="w-4 h-4 bg-[var(--color-dark)] mr-2 rounded"></div>
-            <p>Resume</p>
-          </div>
-        </div>
         
         {/* Cards container */}
         <div
@@ -505,7 +490,7 @@ export default function DraggableProjectCards() {
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
               >
                 <div className="flex justify-between items-center mb-2">
-                  <div className="w-1"></div> {/* Spacer to center heading */}
+                  <div className="w-5"></div> {/* Spacer to balance the close button */}
                   <button 
                     onClick={() => setShowPopup(false)}
                     className="text-[var(--color-dark)] hover:text-[var(--color-secondary-blue)] transition-colors"
@@ -520,6 +505,22 @@ export default function DraggableProjectCards() {
                 <p className="mb-2">
                   Hover, Drag and Click to learn more!
                 </p>
+                
+                {/* Color key inside popup, optimized for smaller space */}
+                <div className="flex flex-col items-start gap-1 text-sm">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-[var(--color-primary-blue)] mr-2 rounded"></div>
+                    <p>Personal Projects</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-[var(--color-primary-pink)] mr-2 rounded"></div>
+                    <p>Work Experience</p>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-[var(--color-dark)] mr-2 rounded"></div>
+                    <p>Resume</p>
+                  </div>
+                </div>
               </div>
             </div>
           )}

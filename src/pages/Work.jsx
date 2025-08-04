@@ -17,20 +17,19 @@ export default function Work() {
       <Header />
       
       <ContentContainer>
-        <div className="flex justify-between items-center">
-          <div>
-            <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-              work
-            </h2>
-            <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
-              {viewMode === 'draggable' ? 
-                "Discover my coding projects and work experience. Just Hover, Drag and Click to learn more!" :
-                "Discover my coding projects and work experience chronologically."
-              }
-            </p>
-          </div>
+        <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+          work
+        </h2>
+        
+        {/* Put paragraph and button in line */}
+        <div className="flex justify-between items-center fade-in-up delay-200 -mt-2">
+          <p className="text-left italic text-zinc-500 text-xs sm:text-sm opacity-50">
+            {viewMode === 'draggable' ? 
+              "Discover my coding projects and work experience." :
+              "Discover my coding projects and work experience chronologically."
+            }
+          </p>
           
-          {/* Toggle button with text styled as paragraph */}
           <button 
             onClick={toggleViewMode}
             className={`btn-custom fade-in delay-300 ${
@@ -39,7 +38,7 @@ export default function Work() {
                 : 'bg-[var(--color-primary-blue)]'
             }`}
           >
-            <p className="italic text-xs sm:text-sm m-0">
+            <p className="italic">
               {viewMode === 'draggable' ? 'List View' : 'Card View'}
             </p>
           </button>
