@@ -43,6 +43,20 @@ function Countdown() {
 }
 
 export default function About() {
+  const [imageHovered, setImageHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Detect if we're on mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -51,7 +65,7 @@ export default function About() {
           about
         </h2>
         <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
-          get to know a little more about me"
+          get to know a little more about me
         </p>
         
         <div className="text-left space-y-4 fade-in-up delay-300">
@@ -75,10 +89,45 @@ export default function About() {
             You should hire me in <Countdown /> when I graduate.
           </p>
 
-          <img src={AboutImg} alt="Dimitri Petrakis" className="rounded-lg shadow-lg mt-16 w-full sm:w-4/5 mx-auto fade-in-up delay-400" />
+          {/* Image with caption - different behavior for mobile vs desktop */}
+          <div className="mt-16 w-full sm:w-4/5 mx-auto fade-in-up delay-400">
+            {!isMobile ? (
+              /* Desktop: hover effect with overlay caption */
+              <div 
+                className="relative cursor-pointer rounded-lg overflow-hidden"
+                onMouseEnter={() => setImageHovered(true)}
+                onMouseLeave={() => setImageHovered(false)}
+              >
+                <img 
+                  src={AboutImg} 
+                  alt="Dimitri Petrakis" 
+                  className={`rounded-lg shadow-lg w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                />
+                {imageHovered && (
+                  <div className="absolute inset-0 flex items-center justify-center text-center">
+                    <p className="text-white text-lg font-medium px-4 py-2 bg-black/50 rounded-lg">
+                      This is me in Ioannina, Greece!
+                    </p>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Mobile: image with caption below (no hover, no blur) */
+              <figure className="space-y-2">
+                <img 
+                  src={AboutImg} 
+                  alt="Dimitri Petrakis" 
+                  className="rounded-lg shadow-lg w-full"
+                />
+                <figcaption className="text-center text-sm italic">
+                  This is me in Ioannina, Greece!
+                </figcaption>
+              </figure>
+            )}
+          </div>
         </div>
       </ContentContainer>
-      
+      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-5" />
     </div>
   );
 }

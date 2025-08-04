@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { sendNewsletterSubscription } from '../utils/emailService';
+import NotionImage from '../assets/img/notion_preview.jpg';
 
 const NewsletterForm = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('');
     const [touched, setTouched] = useState({ email: false });
     const [errors, setErrors] = useState({});
+    const [imageHovered, setImageHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect if we're on mobile
+    useEffect(() => {
+        const checkIsMobile = () => {
+            setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+        };
+
+        checkIsMobile();
+        window.addEventListener('resize', checkIsMobile);
+        return () => window.removeEventListener('resize', checkIsMobile);
+    }, []);
 
     const validate = () => {
         const newErrors = {};
@@ -15,10 +29,10 @@ const NewsletterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Don't allow new submissions after success
         if (status === 'success') return;
-        
+
         const newErrors = validate();
         setTouched({ email: true });
         setErrors(newErrors);
@@ -38,7 +52,7 @@ const NewsletterForm = () => {
 
             // Send email using EmailJS
             await sendNewsletterSubscription(formData);
-            
+
             setStatus('success');
             // Keep email value to prevent editing after successful subscription
         } catch (error) {
@@ -51,10 +65,10 @@ const NewsletterForm = () => {
     const labelClass = (field, value) => {
         const hasValue = value.length > 0;
         const hasError = errors[field] && touched[field];
-        
+
         return `absolute left-3 pointer-events-none transition-all duration-200 ease-in-out
             ${hasValue || document.activeElement?.name === field
-            ? '-top-2 text-xs bg-[var(--color-light)] px-1' 
+            ? '-top-2 text-xs bg-[var(--color-light)] px-1'
             : 'top-2 text-base'
             }
             ${hasError
@@ -67,16 +81,51 @@ const NewsletterForm = () => {
 
     return (
         <div className = 'w-full flex items-center justify-center mb-8'>
-            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-lg"
+            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
-                <h3 className = "">Stay Updated!</h3>
-                <p className="text-sm sm:text-base mb-6">Subscribe to my newsletter to get the latest tech news and free resources.</p>
+                <h3 className = "">Start your job search today!</h3>
+                <p className="text-sm sm:text-base mb-6">Get the latest tech news and free resources.</p>
                 
-                {/* Remove success message display */}
+                {/* Image with caption - different behavior for mobile vs desktop */}
+                <div className="mb-6">
+                    {!isMobile ? (
+                        /* Desktop: hover effect with overlay caption */
+                        <div 
+                            className="relative cursor-pointer rounded-[15px] overflow-hidden w-1/2 mx-auto"
+                            onMouseEnter={() => setImageHovered(true)}
+                            onMouseLeave={() => setImageHovered(false)}
+                        >
+                            <img 
+                                src={NotionImage} 
+                                alt="Notion Tool" 
+                                className={`rounded-[15px] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                            />
+                            {imageHovered && (
+                                <div className="absolute inset-0 flex items-center justify-center text-center">
+                                    <p className="text-white text-lg font-medium px-4 py-2 bg-black/50 rounded-lg">
+                                        Free Notion template with your subscription!
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        /* Mobile: image with caption below (no hover, no blur) */
+                        <figure className="space-y-2 w-3/5 mx-auto">
+                            <img 
+                                src={NotionImage} 
+                                alt="Notion Tool" 
+                                className="rounded-[15px] shadow-[15px] w-full"
+                            />
+                            <figcaption className="text-center text-sm italic">
+                                Free Notion template with your subscription!
+                            </figcaption>
+                        </figure>
+                    )}
+                </div>
                 
                 {status === 'error' && (
                     <div
-                        className="mb-4 p-3 border rounded"
+                        className="mb-4 p-3 border rounded-[15px]"
                         style={{
                             background: 'rgba(255,219,228,0.25)', // faded primary pink
                             borderColor: 'var(--color-primary-pink)',
@@ -88,6 +137,7 @@ const NewsletterForm = () => {
                 )}
                 
                 <div className="space-y-2">
+
                     {/* Email Field */}
                     <div className="relative">
                         <input
@@ -99,7 +149,7 @@ const NewsletterForm = () => {
                             onBlur={() => setTouched(t => ({ ...t, email: true }))}
                             required
                             disabled={status === 'success'}
-                            className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                            className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.email && touched.email
                                     ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
                                     : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'

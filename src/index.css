@@ -226,7 +226,7 @@ a:hover {
   border: 2px solid var(--color-dark);
   background: var(--color-primary-blue);
   color: var(--color-dark);
-  padding: 0.1em 1.2em;
+  padding: 4px;
   transition: 
     background 0.2s, 
     color 0.2s, 

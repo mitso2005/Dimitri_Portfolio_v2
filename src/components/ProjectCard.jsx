@@ -276,7 +276,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
     >
       {/* Upper part (image/info) that flips on hover */}
       <div 
-        className="relative flex-1 overflow-hidden rounded-t-xl"
+        className="relative flex-1 overflow-hidden rounded-t-[15px]"
         style={{ height: imageHeight }}
       >
         {/* For resume card or when not hovered */}
@@ -293,14 +293,14 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover rounded-t-xl pointer-events-none"
+              className="w-full h-full object-cover rounded-t-[15px] pointer-events-none"
               style={{ width: '100%', height: '100%' }}
             />
           </div>
         ) : (
           // Info view (on hover) - only for non-resume cards
           <div 
-            className="w-full h-full text-[var(--color-light)] p-2 flex flex-col justify-between rounded-t-xl bg-[var(--color-dark)]"
+            className="w-full h-full text-[var(--color-light)] p-2 flex flex-col justify-between rounded-t-[15px] bg-[var(--color-dark)]"
             onMouseLeave={() => handleCardHover(false)}
           >
             <div>
@@ -316,12 +316,12 @@ function ProjectCard({ project, containerRef, initialPosition }) {
               <div className="text-xs mb-1 pointer-events-none">
                 <div className="flex flex-wrap gap-1">
                   {project.techStack && project.techStack.slice(0, 3).map((tech, index) => (
-                    <span key={index} className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
+                    <span key={index} className="bg-white/20 px-1 py-0.5 rounded-[15px] text-xs">
                       {tech}
                     </span>
                   ))}
                   {project.techStack && project.techStack.length > 2 && (
-                    <span className="bg-white/20 px-1 py-0.5 rounded-xl text-xs">
+                    <span className="bg-white/20 px-1 py-0.5 rounded-[15px] text-xs">
                       +{project.techStack.length - 2}
                     </span>
                   )}
@@ -352,7 +352,7 @@ function ProjectCard({ project, containerRef, initialPosition }) {
             : project.id === 4 || project.id === 5
               ? "bg-[var(--color-primary-pink)]"
               : "bg-[var(--color-primary-blue)]"
-        } bg-opacity-90 px-4 py-2 rounded-b-xl cursor-pointer hover:bg-opacity-100`}
+        } bg-opacity-90 px-4 py-2 rounded-b-[15px] cursor-pointer hover:bg-opacity-100`}
         onClick={handleLinkClick}
       >
         <h4
@@ -469,22 +469,22 @@ export default function DraggableProjectCards() {
         <div className="flex justify-end mb-2 gap-4 pr-4">
           <div className="flex items-center">
             <div className="w-4 h-4 bg-[var(--color-primary-blue)] mr-2 rounded"></div>
-            <span className="text-xs text-[var(--color-dark)]">Personal Projects</span>
+            <p>Personal Projects</p>
           </div>
           <div className="flex items-center">
             <div className="w-4 h-4 bg-[var(--color-primary-pink)] mr-2 rounded"></div>
-            <span className="text-xs text-[var(--color-dark)]">Work Experience</span>
+            <p>Work Experience</p>
           </div>
           <div className="flex items-center">
             <div className="w-4 h-4 bg-[var(--color-dark)] mr-2 rounded"></div>
-            <span className="text-xs text-[var(--color-dark)]">Resume</span>
+            <p>Resume</p>
           </div>
         </div>
         
         {/* Cards container */}
         <div
           ref={containerRef}
-          className="w-full h-full border-2 border-black relative rounded-3xl flex-grow"
+          className="w-full h-full border-2 border-black relative rounded-[15px] flex-grow"
         >
           {positions &&
             projectsData.map((project, idx) => (

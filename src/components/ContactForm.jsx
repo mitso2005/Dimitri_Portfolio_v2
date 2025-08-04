@@ -78,7 +78,7 @@ const ContactForm = () => {
 
     return (
         <div className='w-full flex items-center justify-center mb-8 py-8'>
-            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-lg"
+            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className="">Collaborate with me!</h3>
                 <div className="flex flex-row justify-center items-center gap-4 md:gap-10 mb-3">
@@ -116,7 +116,7 @@ const ContactForm = () => {
                                 onChange={e => setName(e.target.value)}
                                 onBlur={() => setTouched(t => ({ ...t, name: true }))}
                                 required
-                                className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                                className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                     errors.name && touched.name
                                         ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
                                         : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
@@ -137,7 +137,7 @@ const ContactForm = () => {
                                 value={company}
                                 onChange={e => setCompany(e.target.value)}
                                 onBlur={() => setTouched(t => ({ ...t, company: true }))}
-                                className="w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue"
+                                className="w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue"
                                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
                                 autoComplete="on"
                             />
@@ -157,7 +157,7 @@ const ContactForm = () => {
                             onChange={e => setEmail(e.target.value)}
                             onBlur={() => setTouched(t => ({ ...t, email: true }))}
                             required
-                            className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                            className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.email && touched.email
                                     ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
                                     : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
@@ -180,7 +180,7 @@ const ContactForm = () => {
                             onChange={e => setTopic(e.target.value)}
                             onBlur={() => setTouched(t => ({ ...t, topic: true }))}
                             required
-                            className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
+                            className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
                                 errors.topic && touched.topic
                                     ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
                                     : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'
@@ -202,7 +202,7 @@ const ContactForm = () => {
                             onChange={e => setMessage(e.target.value)}
                             onBlur={() => setTouched(t => ({ ...t, message: true }))}
                             required
-                            className={`w-full px-3 py-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 resize-vertical ${
+                            className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 resize-vertical ${
                                 errors.message && touched.message
                                     ? 'border-primary-pink focus:ring-primary-pink focus:border-primary-pink'
                                     : 'border-gray-300 focus:ring-secondary-blue focus:border-secondary-blue'

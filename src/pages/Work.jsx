@@ -24,7 +24,7 @@ export default function Work() {
         </div>
       </ContentContainer>
       
-      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-25" />
+      <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-5" />
     </div>
   );
 }
