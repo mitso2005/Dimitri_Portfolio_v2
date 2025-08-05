@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header.jsx';
 import DraggableProjectCards from '../components/ProjectCard.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
@@ -7,9 +7,31 @@ import ScrollableProjectList from '../components/ScrollableProjectList.jsx';
 
 export default function Work() {
   const [viewMode, setViewMode] = useState('draggable'); // 'draggable' or 'scrollable'
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  
+  // Check for small screen size
+  useEffect(() => {
+    const checkIsSmallScreen = () => {
+      setIsSmallScreen(window.innerWidth < 768); // Adjust breakpoint as needed
+    };
+    
+    checkIsSmallScreen();
+    window.addEventListener('resize', checkIsSmallScreen);
+    return () => window.removeEventListener('resize', checkIsSmallScreen);
+  }, []);
+
+  // Force list view on small screens
+  useEffect(() => {
+    if (isSmallScreen) {
+      setViewMode('scrollable');
+    }
+  }, [isSmallScreen]);
   
   const toggleViewMode = () => {
-    setViewMode(prev => prev === 'draggable' ? 'scrollable' : 'draggable');
+    // Only allow toggling on larger screens
+    if (!isSmallScreen) {
+      setViewMode(prev => prev === 'draggable' ? 'scrollable' : 'draggable');
+    }
   };
 
   return (
@@ -22,31 +44,34 @@ export default function Work() {
         </h2>
         
         {/* Put paragraph and button in line */}
-        <div className="flex justify-between items-center fade-in-up delay-200 -mt-2">
-          <p className="text-left italic text-zinc-500 text-xs sm:text-sm opacity-50">
+        <div className="flex justify-between items-center fade-in-up delay-200">
+          <p className="text-left italic text-xs sm:text-sm opacity-50">
             {viewMode === 'draggable' ? 
               "Discover my coding projects and work experience." :
               "Discover my coding projects and work experience chronologically."
             }
           </p>
           
-          <button 
-            onClick={toggleViewMode}
-            className={`btn-custom fade-in delay-300 ${
-              viewMode === 'draggable' 
-                ? 'bg-[var(--color-primary-pink)]' 
-                : 'bg-[var(--color-primary-blue)]'
-            }`}
-          >
-            <p className="italic">
-              {viewMode === 'draggable' ? 'List View' : 'Card View'}
-            </p>
-          </button>
+          {/* Only show toggle button on larger screens */}
+          {!isSmallScreen && (
+            <button 
+              onClick={toggleViewMode}
+              className={`btn-custom fade-in delay-300 ${
+                viewMode === 'draggable' 
+                  ? 'bg-[var(--color-primary-pink)]' 
+                  : 'bg-[var(--color-primary-blue)]'
+              }`}
+            >
+              <p className="italic">
+                {viewMode === 'draggable' ? 'List View' : 'Card View'}
+              </p>
+            </button>
+          )}
         </div>
         
         {/* Content based on view mode */}
         <div className="fade-in delay-300 relative">
-          {viewMode === 'draggable' ? (
+          {viewMode === 'draggable' && !isSmallScreen ? (
             <DraggableProjectCards />
           ) : (
             <ScrollableProjectList />

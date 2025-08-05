@@ -12,7 +12,7 @@ export default function Newsletter() {
         <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
           newsletter
         </h2>
-        <p className="text-left italic text-zinc-500 text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50 mb-8">
+        <p className="text-left italic text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50 mb-8">
           Every few months I send out new useful tech resources
         </p>
         

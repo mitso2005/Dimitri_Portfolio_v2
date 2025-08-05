@@ -26,7 +26,7 @@ export default function Contact() {
         <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
           contact
         </h2>
-        <p className="text-left italic text-xs sm:text-sm fade-in-up delay-200 -mt-2 opacity-50">
+        <p className="text-left italic text-xs sm:text-sm fade-in-up delay-200 opacity-50">
           Did you know I make content? Let's create something amazing together.
         </p>
         

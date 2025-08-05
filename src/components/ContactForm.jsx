@@ -77,7 +77,7 @@ const ContactForm = () => {
     };
 
     return (
-        <div className='w-full flex items-center justify-center mb-8 py-8'>
+        <div className='w-full flex items-center justify-center mb-8'>
             <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className="">Collaborate with me!</h3>
