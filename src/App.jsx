@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import AssetPreloader from './components/AssetPreloader.jsx';
 import Logo from './components/Logo';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AssetPreloader />
       
       {/* Fixed gradient background bar at top of screen */}
@@ -31,7 +31,7 @@ function App() {
         <Route path="/newsletter" element={<Mail />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
