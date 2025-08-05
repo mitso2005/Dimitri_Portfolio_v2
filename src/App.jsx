@@ -11,6 +11,15 @@ import './App.css'
 function App() {
   return (
     <BrowserRouter>
+      {/* Fixed gradient background bar at top of screen */}
+      <div 
+        className="fixed top-0 left-0 right-0 z-30"
+        style={{ 
+          height: '120px',
+          background: 'linear-gradient(to bottom, var(--color-light) 50%, transparent 100%)'
+        }}
+      />
+      
       <Logo />
       <Routes>
         <Route path="/" element={<Home />} />

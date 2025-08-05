@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PageNav from './PageNav';
-import logoDesktop from '../assets/img/logo_desktop.svg'; // Adjust path if needed
-import logoMobile from '../assets/img/logo_mobile.svg'; // Adjust path if needed
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
