@@ -22,7 +22,7 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
   // Check for desktop vs mobile screen size
   useEffect(() => {
     const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 768); // Desktop breakpoint
+      setIsDesktop(window.innerWidth >= 820); // Desktop breakpoint
     };
     
     checkIsDesktop();
@@ -30,14 +30,22 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
     return () => window.removeEventListener('resize', checkIsDesktop);
   }, []);
 
-  // Adjust right position to match left visually
-  const positionClass = position === 'right' ? 'right-6.5' : 'left-10';
+  // Adjust position classes based on the position prop
+  let positionClass;
+  if (position === 'right') {
+    positionClass = 'right-10';
+  } else if (position === 'left') {
+    positionClass = 'left-10';
+  } else if (position === 'center') {
+    positionClass = 'left-1/2 -translate-x-1/2'; // Center position
+  }
+  
   const animationClass = direction === 'down' ? 'animate-scroll-vertical' : 'animate-scroll-vertical-reverse';
   
   // Responsive size based on desktop vs mobile
   const imageWidth = isDesktop ? '354px' : '177px';  // Double width on desktop
   const imageHeight = isDesktop ? '550px' : '275px';  // Double height on desktop
-  const containerWidth = isDesktop ? 'w-96' : 'w-48'; // Double container width on desktop
+  const containerWidth = isDesktop ? 'w-auto' : 'w-auto'; // Changed from fixed widths to auto
 
   return (
     <div 
@@ -57,8 +65,12 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
             key={`first-${index}`}
             src={image}
             alt={`Scroll image ${index + 1}`}
-            className="w-full h-auto block mb-2.5"
-            style={{ height: imageHeight, width: imageWidth }}
+            className="block mb-2.5" // Removed w-full class
+            style={{ 
+              height: imageHeight, 
+              width: imageWidth,
+              maxWidth: '100%' // Ensure images don't exceed container width
+            }}
           />
         ))}
         {/* Duplicate set for seamless loop */}
@@ -67,8 +79,12 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
             key={`second-${index}`}
             src={image}
             alt={`Scroll image ${index + 1}`}
-            className="w-full h-auto block mb-2.5"
-            style={{ height: imageHeight, width: imageWidth }}
+            className="block mb-2.5" // Removed w-full class
+            style={{ 
+              height: imageHeight, 
+              width: imageWidth,
+              maxWidth: '100%' // Ensure images don't exceed container width
+            }}
           />
         ))}
       </div>
