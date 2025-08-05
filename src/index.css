@@ -84,6 +84,18 @@ body {
   overflow: hidden;
 }
 
+/* Add mobile scrolling behavior */
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+  
+  /* Add padding to create space at the bottom of mobile pages */
+  .mobile-scroll-container {
+    padding-bottom: 40px;
+  }
+}
+
 h1 {
   font-family: var(--font-junicode);
   font-weight: 400;
@@ -98,6 +110,13 @@ h2 {
   font-size: 96px;
   letter-spacing: 0%;
   /* line-height: normal; */
+}
+
+/* Adjust h2 size on mobile */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 60px;
+  }
 }
 
 h3 {
