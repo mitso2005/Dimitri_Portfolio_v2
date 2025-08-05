@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="/src/assets/fonts/Junicode-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/src/assets/fonts/Satoshi-Bold.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/src/assets/fonts/Sentient-Light.otf" as="font" type="font/otf" crossorigin>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" href="/src/assets/img/hero_image.svg" as="image">
+    
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//api.emailjs.com">
+    
+    <title>Dimitri Petrakis - Portfolio</title>
   </head>
   <body>
     <div id="root"></div>

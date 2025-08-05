@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import LazyImage from './LazyImage.jsx';
 import cissaImage from '../assets/img/projects/cissa.svg';
 import githubImage from '../assets/img/projects/github.svg';
 import porfoliov1Image from '../assets/img/projects/portfolio_v1.svg';
@@ -129,7 +130,14 @@ const ProjectListItem = ({ project }) => {
       link.click();
       document.body.removeChild(link);
     } else {
-      window.open(project.link, '_blank');
+      // Open in new tab with security attributes
+      const link = document.createElement('a');
+      link.href = project.link;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -138,9 +146,8 @@ const ProjectListItem = ({ project }) => {
       className="flex flex-col gap-4 p-4 hover:bg-[var(--color-light)]/10 rounded-[15px] cursor-pointer transition-all"
       onClick={handleClick}
     >
-      {/* Changed layout to always be column (stacked) on both mobile and desktop */}
       <div className="w-full">
-        <img 
+        <LazyImage 
           src={project.image} 
           alt={project.title}
           className="w-full h-48 object-cover rounded-[15px]" // Fixed height for consistent landscape format

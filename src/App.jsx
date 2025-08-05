@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AssetPreloader from './components/AssetPreloader.jsx';
 import Logo from './components/Logo';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -11,6 +12,8 @@ import './App.css'
 function App() {
   return (
     <BrowserRouter>
+      <AssetPreloader />
+      
       {/* Fixed gradient background bar at top of screen */}
       <div 
         className="fixed top-0 left-0 right-0 z-30"

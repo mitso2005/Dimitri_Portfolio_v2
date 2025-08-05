@@ -1,53 +1,61 @@
 @import "tailwindcss";
 
-/* Font-face declarations */
+/* Font-face declarations with font-display and preload hints */
 @font-face {
   font-family: 'Junicode';
   src: url('./assets/fonts/Junicode-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* Shows fallback font until custom font loads */
 }
 @font-face {
   font-family: 'Junicode';
   src: url('./assets/fonts/Junicode-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Junicode';
   src: url('./assets/fonts/Junicode-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Junicode';
   src: url('./assets/fonts/Junicode-BoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Satoshi';
   src: url('./assets/fonts/Satoshi-Bold.otf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Sentient';
   src: url('./assets/fonts/Sentient-Light.otf') format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Sentient';
   src: url('./assets/fonts/Sentient-LightItalic.otf') format('truetype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Sentient';
   src: url('./assets/fonts/Sentient-Bold.otf') format('truetype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -57,9 +65,9 @@
   --color-light: #F7F4F2;
   --color-dark: #111B2D;
 
-  --font-junicode: 'Junicode', serif;
-  --font-satoshi: 'Satoshi', sans-serif;
-  --font-sentient: 'Sentient', serif;
+  --font-junicode: 'Junicode', 'Times New Roman', serif;
+  --font-satoshi: 'Satoshi', 'Arial', sans-serif;
+  --font-sentient: 'Sentient', 'Georgia', serif;
 
   font-family: var(--font-junicode), var(--font-satoshi), var(--font-sentient);
   line-height: 1.5;

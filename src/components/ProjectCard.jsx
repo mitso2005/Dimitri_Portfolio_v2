@@ -184,8 +184,14 @@ function ProjectCard({ project, containerRef, initialPosition }) {
       link.click();
       document.body.removeChild(link);
     } else {
-      // For other cards, open in new tab as before
-      window.open(project.link, '_blank');
+      // For other cards, open in new tab with security attributes
+      const link = document.createElement('a');
+      link.href = project.link;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -493,7 +499,7 @@ export default function DraggableProjectCards() {
                   <div className="w-5"></div> {/* Spacer to balance the close button */}
                   <button 
                     onClick={() => setShowPopup(false)}
-                    className="text-[var(--color-dark)] hover:text-[var(--color-secondary-blue)] transition-colors"
+                    className="text-[var(--color-dark)] hover:text-[var(--color-secondary_blue)] transition-colors"
                     aria-label="Close"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
