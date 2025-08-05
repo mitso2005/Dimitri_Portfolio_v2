@@ -10,7 +10,7 @@ import resumePdf from '../assets/pdf/resume.pdf'; // Add this import for the PDF
 // Define preset positions by screen size (small, medium, large)
 const presetPositions = {
   small: [
-    { x: 10, y: 10 },     // Project 1
+    { x: 50, y: 10 },     // Project 1
     { x: 120, y: 180 },   // Project 2
     { x: 20, y: 350 },    // Project 3
     { x: 150, y: 50 },    // Project 4
@@ -18,21 +18,21 @@ const presetPositions = {
     { x: 160, y: 450 }    // Project 6
   ],
   medium: [
-    { x: 50, y: 50 },     // Project 1
-    { x: 500, y: 400 },   // Project 2
-    { x: 80, y: 400 },    // Project 3
-    { x: 400, y: 80 },    // Project 4
-    { x: 150, y: 280 },   // Project 5
-    { x: 450, y: 350 }    // Project 6
+    { x: 25, y: 25 },     // Project 1
+    { x: 450, y: 375 },   // Project 2
+    { x: 775, y: 475 },    // Project 3
+    { x: 700, y: 75 },    // Project 4
+    { x: 50, y: 450 },   // Project 5
+    { x: 300, y: 100 }    // Project 6
   ],
   large: [
-    { x: 100, y: 0 },    // Project 1
-    { x: 500, y: 150 },   // Project 2
-    { x: 200, y: 350 },   // Project 3
-    { x: 700, y: 100 },   // Project 4
-    { x: 300, y: 250 },   // Project 5
-    { x: 600, y: 400 }    // Project 6
-  ]
+    { x: 25, y: 25 },     // Project 1
+    { x: 500, y: 450 },   // Project 2
+    { x: 775, y: 475 },    // Project 3
+    { x: 700, y: 75 },    // Project 4
+    { x: 50, y: 450 },   // Project 5
+    { x: 300, y: 100 }    // Project 6
+  ],
 };
 
 // Sample project data - replace with your actual projects
@@ -57,7 +57,7 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "Github",
+    title: "More Projects!",
     image: githubImage,
     techStack: ["React JS", "React Native", "Python", "Ruby", "JavaScript"],
     description: "Check out my other projects on GitHub. I'm currently learning Ruby on Rails and React Native.",
@@ -88,7 +88,7 @@ const projectsData = [
     id: 6,
     title: "Resume",
     image: resumeImage,
-    link: resumePdf // Update this to use the imported PDF file
+    link: resumePdf
   }
 ];
 
@@ -464,13 +464,13 @@ export default function DraggableProjectCards() {
   }, [positions, containerRef.current, screenSize]);
 
   return (
-    <div className="fixed left-10 right-10 bottom-10 top-75">
+    <div className="fixed left-10 right-10 bottom-10 top-80">
       <div className="flex flex-col h-full">
         
         {/* Cards container */}
         <div
           ref={containerRef}
-          className="w-full h-full border-2 border-black relative rounded-[15px] flex-grow"
+          className="w-full h-full shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px] flex-grow"
         >
           {positions &&
             projectsData.map((project, idx) => (
@@ -486,7 +486,7 @@ export default function DraggableProjectCards() {
           {showPopup && (
             <div className="absolute inset-0 flex items-center justify-center z-50">
               <div 
-                className="p-4 shadow-md rounded-[15px] max-w-xs text-center"
+                className="p-4 shadow-md border-2 border-[var(--color-dark)] rounded-[15px] max-w-xs text-center"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}
               >
                 <div className="flex justify-between items-center mb-2">
@@ -502,8 +502,11 @@ export default function DraggableProjectCards() {
                     </svg>
                   </button>
                 </div>
-                <p className="mb-2">
-                  Hover, Drag and Click to learn more!
+                <p className="bold">
+                  Hover, Drag and Click to
+                </p>
+                <p className="bold mb-2">
+                  learn more!
                 </p>
                 
                 {/* Color key inside popup, optimized for smaller space */}

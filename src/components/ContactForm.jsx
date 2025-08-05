@@ -78,7 +78,7 @@ const ContactForm = () => {
 
     return (
         <div className='w-full flex items-center justify-center mb-8'>
-            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-[15px]"
+            <div className="max-w-5xl w-full p-4 sm:p-8 border-2 border-[var(--color-dark)] shadow-md rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className="">Collaborate with me!</h3>
                 <div className="flex flex-row justify-center items-center gap-4 md:gap-10 mb-3">
@@ -86,7 +86,7 @@ const ContactForm = () => {
                     <h4 className="font-h4-sm font-h4-md">Tech • Travel • Unilife</h4>
                     <h4 className="font-h4-sm font-h4-md">7k+ Followers</h4>
                 </div>
-                <p className="text-sm sm:text-base mb-6">If you're looking to get more eyes to your brand, send me an email using the form below.</p>
+                <p className="text-sm sm:text-base mb-6">Looking to get more eyes to your brand? Send me an email using the form below.</p>
                 
                 {/* Remove success message display */}
                 
@@ -234,8 +234,8 @@ const ContactForm = () => {
                         {status === 'sending' 
                           ? 'Sending...' 
                           : status === 'success'
-                            ? 'Sent Successfully!'
-                            : 'Send Inquiry'}
+                            ? 'Thank you!'
+                            : 'Message Me!'}
                     </button>
                 </div>
             </div>

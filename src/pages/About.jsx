@@ -64,7 +64,7 @@ export default function About() {
         <h2 className="italic text-left text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
           about
         </h2>
-        <p className="text-left italic text-xs sm:text-sm fade-in-up delay-200 opacity-50">
+        <p className="text-left italic fade-in-up delay-200">
           get to know a little more about me
         </p>
         
@@ -90,7 +90,7 @@ export default function About() {
           </p>
 
           {/* Image with caption - different behavior for mobile vs desktop */}
-          <div className="mt-16 w-full sm:w-4/5 mx-auto rounded-[15px] fade-in-up delay-400">
+          <div className="mt-10 w-full sm:w-4/5 mx-auto rounded-[15px] fade-in-up delay-400">
             {!isMobile ? (
               /* Desktop: hover effect with overlay caption */
               <div
@@ -101,7 +101,7 @@ export default function About() {
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 
-                  className={`rounded-[15px] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                  className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
                 />
                 {imageHovered && (
                   <div className="absolute inset-0 flex items-center justify-center text-center">
@@ -113,7 +113,7 @@ export default function About() {
               </div>
             ) : (
               /* Mobile: image with caption below (no hover, no blur) */
-              <figure className="space-y-2">
+              <figure>
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 

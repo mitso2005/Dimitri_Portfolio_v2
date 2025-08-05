@@ -45,7 +45,7 @@ export default function Work() {
         
         {/* Put paragraph and button in line */}
         <div className="flex justify-between items-center fade-in-up delay-200">
-          <p className="text-left italic text-xs sm:text-sm opacity-50">
+          <p className="text-left italic text-xs sm:text-sm">
             {viewMode === 'draggable' ? 
               "Discover my coding projects and work experience." :
               "Discover my coding projects and work experience chronologically."

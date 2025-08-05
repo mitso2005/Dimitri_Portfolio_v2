@@ -80,8 +80,8 @@ const NewsletterForm = () => {
     };
 
     return (
-        <div className = 'w-full flex items-center justify-center mb-8'>
-            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md rounded-[15px]"
+        <div className = 'w-full flex items-center justify-center'>
+            <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md border-2 border-[var(--color-dark)] rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className = "">Start your job search today!</h3>
                 <p className="text-sm sm:text-base mb-6">Get the latest tech news and free resources.</p>
@@ -98,7 +98,7 @@ const NewsletterForm = () => {
                             <img 
                                 src={NotionImage} 
                                 alt="Notion Tool" 
-                                className={`rounded-[15px] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                                className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
                             />
                             {imageHovered && (
                                 <div className="absolute inset-0 flex items-center justify-center text-center">
@@ -182,7 +182,7 @@ const NewsletterForm = () => {
                           ? 'Subscribing...' 
                           : status === 'success'
                             ? 'Subscribed!'
-                            : 'Subscribe to Newsletter'}
+                            : 'Subscribe!'}
                     </button>
                 </div>
             </div>
