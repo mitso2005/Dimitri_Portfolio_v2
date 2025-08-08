@@ -18,6 +18,14 @@ const Header = () => {
 
   return (
     <header className="w-full flex justify-between items-center p-4 md:p-6">
+      {/* Fixed gradient background bar at top of screen */}
+      <div 
+        className="absolute top-0 left-0 right-0 z-30"
+        style={{ 
+          height: '100px',
+          background: 'linear-gradient(to bottom, var(--color-light) 50%, transparent 100%)'
+        }}
+      />
       <div className="flex-1">
         <PageNav />
         <Logo />
