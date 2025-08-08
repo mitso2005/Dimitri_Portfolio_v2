@@ -73,7 +73,7 @@ export default function Work() {
         </div>
         
         {/* Content based on view mode */}
-        <div className="fade-in delay-400 relative w-full">
+        <div className="fade-in delay-500 relative w-full">
           {viewMode === 'draggable' && !isSmallScreen ? (
             <div className="w-full" style={{ marginTop: '40px', marginBottom: '40px' }}>
               <DraggableProjectCards />

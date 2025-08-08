@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[var(--color-dark)] text-[var(--color-light)] py-10 mt-auto">
+    <footer className="w-full bg-[var(--color-dark)] text-[var(--color-light)] py-10 mt-auto z-50">
       <div className="max-w-6xl mx-auto px-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         {/* Navigation Links - Left Side */}
         <nav className="hidden md:flex flex-col md:flex-row gap-4 md:gap-8">

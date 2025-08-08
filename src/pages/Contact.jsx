@@ -31,12 +31,12 @@ export default function Contact() {
           Did you know I make content? Let's create something amazing together.
         </p>
         
-        <div className="fade-in-up delay-300">
+        <div className="fade-in-up delay-500">
           <ContactForm />
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center gap-6 mt-10 fade-in-up delay-400">
+        <div className="flex justify-center gap-6 mt-10 fade-in-up delay-600">
           <a 
             href="https://www.linkedin.com/in/dptrks/" 
             target="_blank" 

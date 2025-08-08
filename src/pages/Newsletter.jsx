@@ -17,19 +17,26 @@ export default function Newsletter() {
           Every few months I send out new useful tech resources
         </p>
         
-        <div className="fade-in-up delay-300 flex flex-col items-center">
+        <div className="flex flex-col items-center">
           <div className="w-full max-w-4xl mx-auto">
-            <h3 className="text-left text-2xl mb-2 -semibold">
+            <h3 className="text-left fade-in-up delay-300 text-2xl mb-2 -semibold">
               Free Job and Leetcode Tracker!
             </h3>
-            <p className="text-left mb-10">
-              Stay organized during your job hunt with this easy-to-use Notion template. 
-              Track applications, schedule interviews, and manage your progress effortlessly. 
-              Pair this with a Leetcode tracker to keep your coding skills sharp and land your dream job.
-            </p>
+            <div className="text-left space-y-4 fade-in-up delay-400 mb-10">
+              <p>
+                Stay organized during your job hunt with this easy-to-use Notion template. 
+              </p>
+              <p>
+                Track applications, schedule interviews, and manage your progress effortlessly.
+              </p>
+              <p>
+                Pair this with a Leetcode tracker to keep your coding skills sharp and land your dream job.
+              </p>
+            </div>
           </div>
-          
-          <NewsletterForm />
+          <div className="fade-in-up delay-500">
+            <NewsletterForm />
+          </div>
         </div>
       </ContentContainer>
       

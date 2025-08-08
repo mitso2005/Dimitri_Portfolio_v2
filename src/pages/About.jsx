@@ -86,12 +86,12 @@ export default function About() {
             I'm also volenteering as a Full Stack Engineer for CISSA's (Computer and Information Systems Student Association) Projects Team.
           </p>
 
-          <p>
+          <p className="fade-in-up delay-400">
             You should hire me in <Countdown /> when I graduate.
           </p>
 
           {/* Image with caption - different behavior for mobile vs desktop */}
-          <div className="mt-10 w-full sm:w-4/5 mx-auto rounded-[15px] fade-in-up delay-400">
+          <div className="mt-10 w-full sm:w-4/5 mx-auto rounded-[15px] fade-in-up delay-500">
             {!isMobile ? (
               /* Desktop: hover effect with overlay caption */
               <div
