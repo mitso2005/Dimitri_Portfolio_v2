@@ -21,8 +21,8 @@ const Footer = () => {
           </Link>
         </nav>
 
-        {/* Social Media Icons - Right Side */}
-        <div className="flex gap-6 items-center">
+        {/* Social Media Icons - Right Side on Desktop, Centered on Mobile */}
+        <div className="flex gap-6 items-center justify-center md:justify-end w-full md:w-auto">
           <a 
             href="https://www.linkedin.com/in/dptrks/" 
             target="_blank" 

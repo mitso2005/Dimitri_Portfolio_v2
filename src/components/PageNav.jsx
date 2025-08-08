@@ -46,7 +46,7 @@ export default function PageNav() {
             <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">NEWSLETTER</h4>
           </Link>
           <Link to="/contact" onClick={closeMenu}>
-            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">CONTACT ME</h4>
+            <h4 className="text-[var(--color-light)] hover:text-[var(--color-primary-blue)] transition-colors">CONTACT</h4>
           </Link>
 
           {/* Social Media Icons */}
