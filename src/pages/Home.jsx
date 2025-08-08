@@ -5,6 +5,19 @@ import HomeNav from '../components/HomeNav.jsx';
 import Logo from '../components/Logo.jsx';
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Disable all scrolling on home page
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+    };
+  }, []);
+
   return (
     <div>
       <HomeNav />
