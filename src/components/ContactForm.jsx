@@ -58,6 +58,11 @@ const ContactForm = () => {
         }
     };
 
+    // Email validation: must contain @ and . with a suffix
+    const isValidEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
     // Helper for label style with floating behavior
     const labelClass = (field, value) => {
         const hasValue = value.length > 0;
@@ -153,6 +158,10 @@ const ContactForm = () => {
                         <label htmlFor="email" className={labelClass('email', email)}>
                             Email Address*
                         </label>
+                        {/* Show error if invalid email and touched */}
+                        {email && !isValidEmail(email) && touched.email && (
+                            <span className="text-red-500 text-xs absolute left-3 -bottom-5">Enter a valid email address</span>
+                        )}
                     </div>
 
                     {/* Topic Field */}
@@ -205,11 +214,12 @@ const ContactForm = () => {
                         disabled={
                             status === 'sending' ||
                             status === 'success' ||
-                            !name || !email || !topic || !message
+                            !name || !email || !topic || !message ||
+                            !isValidEmail(email)
                         }
                         onClick={handleSubmit}
                         className={`btn-custom w-full${
-                            status === 'sending' || !name || !email || !topic || !message 
+                            status === 'sending' || !name || !email || !topic || !message || !isValidEmail(email)
                               ? ' inactive' 
                               : status === 'success' 
                                 ? ' active'

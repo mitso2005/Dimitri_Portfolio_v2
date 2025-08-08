@@ -5,7 +5,7 @@ import NotionImage from '../assets/img/notion_preview.jpg';
 const NewsletterForm = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('');
-    const [touched, setTouched] = useState({ email: false });
+    const [touched, setTouched] = useState(false);
     const [errors, setErrors] = useState({});
     const [imageHovered, setImageHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -28,6 +28,8 @@ const NewsletterForm = () => {
         return newErrors;
     };
 
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -35,7 +37,7 @@ const NewsletterForm = () => {
         if (status === 'success') return;
 
         const newErrors = validate();
-        setTouched({ email: true });
+        setTouched(true);
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length > 0) {
@@ -159,7 +161,7 @@ const NewsletterForm = () => {
                             name="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
-                            onBlur={() => setTouched(t => ({ ...t, email: true }))}
+                            onBlur={() => setTouched(true)}
                             required
                             disabled={status === 'success'}
                             className={`w-full px-3 py-3 border rounded-[15px] shadow-sm focus:outline-none focus:ring-2 transition-colors duration-200 ${
@@ -180,11 +182,12 @@ const NewsletterForm = () => {
                         disabled={
                             status === 'sending' ||
                             status === 'success' ||
-                            !email
+                            !email ||
+                            !isValidEmail(email)
                         }
                         onClick={handleSubmit}
                         className={`btn-custom w-full${
-                            status === 'sending' || !email 
+                            status === 'sending' || !email || !isValidEmail(email)
                               ? ' inactive' 
                               : status === 'success' 
                                 ? ' active'
