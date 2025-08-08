@@ -22,8 +22,6 @@ function App() {
           background: 'linear-gradient(to bottom, var(--color-light) 50%, transparent 100%)'
         }}
       />
-      
-      <Logo />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

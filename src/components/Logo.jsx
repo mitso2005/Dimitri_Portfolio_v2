@@ -7,7 +7,8 @@ export default function Logo() {
       to="/"
       className="
         animate-fade-in
-        fixed 
+        fixed
+        lg:absolute
         top-6
         left-10
         lg:right-10 lg:left-auto 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageNav from './PageNav';
+import Logo from './Logo';
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -19,6 +20,7 @@ const Header = () => {
     <header className="w-full flex justify-between items-center p-4 md:p-6">
       <div className="flex-1">
         <PageNav />
+        <Logo />
       </div>
     </header>
   );
