@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
@@ -6,6 +7,16 @@ import NewsletterForm from '../components/NewsletterForm.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
 
 export default function Newsletter() {
+  const location = useLocation();
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, [location.key]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />

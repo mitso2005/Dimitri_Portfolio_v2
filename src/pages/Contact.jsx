@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import ContactForm from '../components/ContactForm.jsx';
 import ScrollingImages from '../components/ScrollingImages.jsx';
@@ -8,6 +9,7 @@ import heroImage from '../assets/img/hero_image.svg';
 
 export default function Contact() {
   const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+  const location = useLocation();
 
   // Detect if screen is narrower than 450px
   useEffect(() => {
@@ -19,6 +21,15 @@ export default function Contact() {
     window.addEventListener('resize', checkScreenWidth);
     return () => window.removeEventListener('resize', checkScreenWidth);
   }, []);
+
+  // Scroll to top on mount
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, [location.key]);
 
   return (
     <div className="min-h-screen flex flex-col" >

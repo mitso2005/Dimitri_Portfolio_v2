@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
@@ -47,6 +48,7 @@ export default function About() {
   const [imageHovered, setImageHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
+  const location = useLocation();
 
   // Detect if we're on mobile
   useEffect(() => {
@@ -58,6 +60,15 @@ export default function About() {
     window.addEventListener('resize', checkIsMobile);
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
+
+  // Scroll to top on mount
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, [location.key]);
 
   // Placeholder style (solid color, same aspect ratio as your image)
   const placeholderStyle = {

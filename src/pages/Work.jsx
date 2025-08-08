@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import DraggableProjectCards from '../components/ProjectCard.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
@@ -9,6 +10,7 @@ import ScrollableProjectList from '../components/ScrollableProjectList.jsx';
 export default function Work() {
   const [viewMode, setViewMode] = useState('draggable'); // 'draggable' or 'scrollable'
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const location = useLocation();
   
   // Check for small screen size
   useEffect(() => {
@@ -34,6 +36,15 @@ export default function Work() {
       setViewMode(prev => prev === 'draggable' ? 'scrollable' : 'draggable');
     }
   };
+
+  // Scroll to top on mount
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, [location.key]);
 
   return (
     <div className="min-h-screen flex flex-col">
