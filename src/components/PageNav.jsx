@@ -5,11 +5,20 @@ export default function PageNav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
     if (menuOpen) {
+      window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
     }
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+    };
   }, [menuOpen]);
 
   const toggleMenu = () => setMenuOpen(prev => !prev);
