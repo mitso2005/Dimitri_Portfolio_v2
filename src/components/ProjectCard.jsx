@@ -184,14 +184,8 @@ function ProjectCard({ project, containerRef, initialPosition }) {
       link.click();
       document.body.removeChild(link);
     } else {
-      // For other cards, open in new tab with security attributes
-      const link = document.createElement('a');
-      link.href = project.link;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // For other cards, open in new tab as before
+      window.open(project.link, '_blank');
     }
   };
 
@@ -470,13 +464,15 @@ export default function DraggableProjectCards() {
   }, [positions, containerRef.current, screenSize]);
 
   return (
-    <div className="fixed left-10 right-10 bottom-10 top-80">
+    <div className="w-full">
       <div className="flex flex-col h-full">
-        
         {/* Cards container */}
         <div
           ref={containerRef}
-          className="w-full h-full shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px] flex-grow"
+          className="w-full shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px]"
+          style={{ 
+            height: 'calc(100vh - 320px)', // Adjust height to account for header, content above, and footer space
+          }}
         >
           {positions &&
             projectsData.map((project, idx) => (

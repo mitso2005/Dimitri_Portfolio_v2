@@ -71,9 +71,11 @@ export default function Work() {
         </div>
         
         {/* Content based on view mode */}
-        <div className="fade-in delay-400 relative">
+        <div className="fade-in delay-400 relative w-full">
           {viewMode === 'draggable' && !isSmallScreen ? (
-            <DraggableProjectCards />
+            <div className="w-full">
+              <DraggableProjectCards />
+            </div>
           ) : (
             <ScrollableProjectList />
           )}
