@@ -36,7 +36,7 @@ export default function Contact() {
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center gap-6 mt-10 fade-in-up delay-600">
+        <div className="hidden md:flex justify-center gap-6 mt-10 fade-in-up delay-600">
           <a 
             href="https://www.linkedin.com/in/dptrks/" 
             target="_blank" 
