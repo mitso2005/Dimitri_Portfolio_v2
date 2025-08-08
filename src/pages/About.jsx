@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
 import ContentContainer from '../components/ContentContainer.jsx';
 import AboutImg from '../assets/img/about_image_compress.jpg';
@@ -128,6 +129,7 @@ export default function About() {
         </div>
       </ContentContainer>
       <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-5" />
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Header from '../components/Header.jsx';
 import ContactForm from '../components/ContactForm.jsx';
 import ScrollingImages from '../components/ScrollingImages.jsx';
 import ContentContainer from '../components/ContentContainer.jsx';
+import Footer from '../components/Footer.jsx';
 import heroImage from '../assets/img/hero_image.svg';
 
 export default function Contact() {
@@ -95,6 +96,7 @@ export default function Contact() {
         )}
       </div>
       <img src={heroImage} alt="Illustration of Dimitri" className="hero-image opacity-0" />
+      <Footer />
     </div>
   );
 }
