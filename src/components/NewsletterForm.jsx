@@ -9,6 +9,7 @@ const NewsletterForm = () => {
     const [errors, setErrors] = useState({});
     const [imageHovered, setImageHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [imgLoaded, setImgLoaded] = useState(false);
 
     // Detect if we're on mobile
     useEffect(() => {
@@ -79,6 +80,15 @@ const NewsletterForm = () => {
             }`;
     };
 
+    // Placeholder style (solid color)
+    const placeholderStyle = {
+        backgroundColor: 'var(--color-light)',
+        width: '100%',
+        aspectRatio: '4/3',
+        borderRadius: '15px',
+        display: 'block',
+    };
+
     return (
         <div className = 'w-full flex items-center justify-center'>
             <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md border-2 border-[var(--color-dark)] rounded-[15px]"
@@ -95,14 +105,23 @@ const NewsletterForm = () => {
                             onMouseEnter={() => setImageHovered(true)}
                             onMouseLeave={() => setImageHovered(false)}
                         >
+                            {/* Solid color placeholder */}
+                            {!imgLoaded && (
+                                <div
+                                    style={placeholderStyle}
+                                    className="absolute inset-0 animate-pulse"
+                                />
+                            )}
                             <img 
                                 src={NotionImage} 
                                 alt="Notion Tool" 
-                                className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                                className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''} ${imgLoaded ? 'relative' : 'opacity-0'}`}
+                                onLoad={() => setImgLoaded(true)}
+                                style={{ position: 'relative', zIndex: 2 }}
                             />
-                            {imageHovered && (
+                            {imageHovered && imgLoaded && (
                                 <div className="absolute inset-0 flex items-center justify-center text-center">
-                                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50">
+                                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50 rounded-[15px] z-10">
                                         Free Notion template with your subscription!
                                     </p>
                                 </div>
@@ -110,13 +129,21 @@ const NewsletterForm = () => {
                         </div>
                     ) : (
                         /* Mobile: image with caption below (no hover, no blur) */
-                        <figure className="space-y-2 w-3/5 mx-auto">
+                        <figure className="space-y-2 w-3/5 mx-auto relative">
+                            {!imgLoaded && (
+                                <div
+                                    style={placeholderStyle}
+                                    className="absolute inset-0 animate-pulse"
+                                />
+                            )}
                             <img 
                                 src={NotionImage} 
                                 alt="Notion Tool" 
-                                className="rounded-[15px] shadow-[15px] w-full"
+                                className={`rounded-[15px] shadow-[15px] w-full ${imgLoaded ? 'relative' : 'opacity-0'}`}
+                                onLoad={() => setImgLoaded(true)}
+                                style={{ position: 'relative', zIndex: 2 }}
                             />
-                            <p className="text-centeritalic">
+                            <p className="text-center italic relative z-10">
                                 Free Notion template with your subscription!
                             </p>
                         </figure>

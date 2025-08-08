@@ -46,7 +46,8 @@ function Countdown() {
 export default function About() {
   const [imageHovered, setImageHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   // Detect if we're on mobile
   useEffect(() => {
     const checkIsMobile = () => {
@@ -57,6 +58,15 @@ export default function About() {
     window.addEventListener('resize', checkIsMobile);
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
+
+  // Placeholder style (solid color, same aspect ratio as your image)
+  const placeholderStyle = {
+    backgroundColor: 'var(--color-light)',
+    width: '100%',
+    aspectRatio: '4/3',
+    borderRadius: '15px',
+    display: 'block',
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -98,15 +108,25 @@ export default function About() {
                 className="relative cursor-pointer rounded-[15px] overflow-hidden"
                 onMouseEnter={() => setImageHovered(true)}
                 onMouseLeave={() => setImageHovered(false)}
+                style={{ minHeight: 0 }}
               >
+                {/* Solid color placeholder */}
+                {!imgLoaded && (
+                  <div
+                    style={placeholderStyle}
+                    className="absolute inset-0 animate-pulse"
+                  />
+                )}
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 
-                  className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''}`}
+                  className={`rounded-[15px] border-2 border-[var(--color-dark)] shadow-[15px] w-full transition-all duration-300 ${imageHovered ? 'blur-md scale-105' : ''} ${imgLoaded ? 'relative' : 'opacity-0'}`}
+                  onLoad={() => setImgLoaded(true)}
+                  style={{ position: 'relative', zIndex: 2 }}
                 />
-                {imageHovered && (
+                {imageHovered && imgLoaded && (
                   <div className="absolute inset-0 flex items-center justify-center text-center">
-                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50 rounded-[15px]">
+                    <p className="text-[var(--color-light)] text-lg font-medium px-4 py-2 bg-black/50 rounded-[15px] z-10">
                       Me in Ioannina, Greece!
                     </p>
                   </div>
@@ -114,13 +134,21 @@ export default function About() {
               </div>
             ) : (
               /* Mobile: image with caption below (no hover, no blur) */
-              <figure>
+              <figure className="relative">
+                {!imgLoaded && (
+                  <div
+                    style={placeholderStyle}
+                    className="absolute inset-0 animate-pulse"
+                  />
+                )}
                 <img 
                   src={AboutImg} 
                   alt="Dimitri Petrakis" 
-                  className="rounded-[15px] shadow-[15px] w-full"
+                  className={`rounded-[15px] shadow-[15px] w-full ${imgLoaded ? 'relative' : 'opacity-0'}`}
+                  onLoad={() => setImgLoaded(true)}
+                  style={{ position: 'relative', zIndex: 2 }}
                 />
-                <p className="text-center italic">
+                <p className="text-center italic relative z-10">
                   Me in Ioannina, Greece!
                 </p>
               </figure>
