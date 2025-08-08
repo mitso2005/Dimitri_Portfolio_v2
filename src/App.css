@@ -13,7 +13,7 @@
 }
 
 .hero-image {
-  position: fixed;
+  position: absolute;
   right: -10%;
   top: 60%;
   transform: translateY(-50%);
@@ -25,13 +25,14 @@
 
 @media (max-width: 768px) {
   .hero-image {
+    position: fixed;
     display: block;
     height: auto;    
     width: auto;
     min-width: 120vw;      
     min-height: 150vh;
     right: -50vw;    
-    top: -20vh;    
+    top: -10vh;    
     transform: none;
     z-index: -1;
   }

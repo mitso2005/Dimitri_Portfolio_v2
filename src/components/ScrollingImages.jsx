@@ -49,7 +49,7 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1, 
 
   return (
     <div 
-      className={`fixed ${positionClass} top-0 ${containerWidth} h-screen overflow-hidden pointer-events-none`} 
+      className={`absolute ${positionClass} top-0 ${containerWidth} h-screen overflow-hidden pointer-events-none`} 
       style={{ 
         zIndex: 0, 
         opacity: opacity,
