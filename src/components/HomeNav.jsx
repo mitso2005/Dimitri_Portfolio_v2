@@ -118,7 +118,7 @@ export default function HomeNav() {
           setPermanentlyRevealed(prev => new Set([...prev, actualIndex]));
         }, (actualIndex) * 500); // 0.5s, 1s, 1.5s delays
       });
-    }, 2000);
+    }, 3000);
 
     return () => {
       if (timeoutRef.current) {
