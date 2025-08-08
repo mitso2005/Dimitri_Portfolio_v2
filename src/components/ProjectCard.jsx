@@ -19,11 +19,11 @@ const presetPositions = {
   ],
   medium: [
     { x: 25, y: 25 },     // Project 1
-    { x: 450, y: 375 },   // Project 2
-    { x: 775, y: 475 },    // Project 3
-    { x: 700, y: 75 },    // Project 4
+    { x: 425, y: 475 },   // Project 2
+    { x: 725, y: 400 },    // Project 3
+    { x: 600, y: 75 },    // Project 4
     { x: 50, y: 450 },   // Project 5
-    { x: 300, y: 100 }    // Project 6
+    { x: 350, y: 50 }    // Project 6
   ],
   large: [
     { x: 25, y: 25 },     // Project 1
@@ -469,9 +469,9 @@ export default function DraggableProjectCards() {
         {/* Cards container */}
         <div
           ref={containerRef}
-          className="w-full shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px]"
+          className="shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px]"
           style={{ 
-            height: 'calc(100vh - 320px)', // Adjust height to account for header, content above, and footer space
+            height: 'calc(100vh - 320px)',
           }}
         >
           {positions &&

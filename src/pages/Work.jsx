@@ -39,45 +39,49 @@ export default function Work() {
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <ContentContainer>
-        <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
-          work
-        </h2>
-        
-        {/* Put paragraph and button in line */}
-        <div className="flex justify-between items-center fade-in-up delay-200">
-          <p className="text-left italic text-xs sm:text-sm">
-            {viewMode === 'draggable' ? 
-              "Discover my coding projects and work experience." :
-              "Discover my coding projects and work experience chronologically."
-            }
-          </p>
+      <ContentContainer allowFullWidth={viewMode === 'draggable' && !isSmallScreen}>
+        <div className={viewMode === 'draggable' && !isSmallScreen ? 'max-w-3xl mx-auto' : ''}>
+          <h2 className="text-left italic text-4xl sm:text-4xl font-bold fade-in-up delay-100 font-title">
+            work
+          </h2>
           
-          {/* Only show toggle button on larger screens */}
-          {!isSmallScreen && (
-            <button 
-              onClick={toggleViewMode}
-              className={`btn-custom fade-in delay-300 ${
-                viewMode === 'draggable' 
-                  ? 'bg-[var(--color-primary-pink)]' 
-                  : 'bg-[var(--color-primary-blue)]'
-              }`}
-            >
-              <p className="italic">
-                {viewMode === 'draggable' ? 'List View' : 'Card View'}
-              </p>
-            </button>
-          )}
+          {/* Put paragraph and button in line */}
+          <div className="flex justify-between items-center fade-in-up delay-200">
+            <p className="text-left italic text-xs sm:text-sm">
+              {viewMode === 'draggable' ? 
+                "Discover my coding projects and work experience." :
+                "Discover my coding projects and work experience chronologically."
+              }
+            </p>
+            
+            {/* Only show toggle button on larger screens */}
+            {!isSmallScreen && (
+              <button 
+                onClick={toggleViewMode}
+                className={`btn-custom fade-in delay-300 ${
+                  viewMode === 'draggable' 
+                    ? 'bg-[var(--color-primary-pink)]' 
+                    : 'bg-[var(--color-primary-blue)]'
+                }`}
+              >
+                <p className="italic">
+                  {viewMode === 'draggable' ? 'List View' : 'Card View'}
+                </p>
+              </button>
+            )}
+          </div>
         </div>
         
         {/* Content based on view mode */}
         <div className="fade-in delay-400 relative w-full">
           {viewMode === 'draggable' && !isSmallScreen ? (
-            <div className="w-full">
+            <div className="w-full" style={{ marginTop: '40px', marginBottom: '40px' }}>
               <DraggableProjectCards />
             </div>
           ) : (
-            <ScrollableProjectList />
+            <div className={viewMode === 'draggable' && !isSmallScreen ? '' : 'max-w-3xl mx-auto'}>
+              <ScrollableProjectList />
+            </div>
           )}
         </div>
       </ContentContainer>
