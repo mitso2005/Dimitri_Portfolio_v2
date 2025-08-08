@@ -191,39 +191,11 @@ const ScrollableProjectList = () => {
     const handleScroll = () => {
       if (!scrollRef.current) return;
       
-      const items = scrollRef.current.querySelectorAll('.fade-scroll-item');
       const topHeader = scrollRef.current.querySelectorAll('.fade-scroll-header-top');
       const bottomHeader = scrollRef.current.querySelectorAll('.fade-scroll-header-bottom');
       
       const scrollTop = scrollRef.current.scrollTop;
       const containerHeight = scrollRef.current.clientHeight;
-      
-      // Handle content items fade in/out
-      items.forEach((item) => {
-        const itemTop = item.offsetTop;
-        const itemHeight = item.offsetHeight;
-        
-        // Calculate visibility
-        const isVisible = 
-          itemTop + itemHeight > scrollTop + 60 && // Add offset for headers
-          itemTop < scrollTop + containerHeight - 40; // Add bottom margin
-        
-        // Calculate fade amount based on position
-        let opacity = 1;
-        
-        // Fade out when scrolling out of top
-        if (itemTop < scrollTop + 100) {
-          opacity = Math.max(0, (itemTop - scrollTop) / 100 + 1);
-        }
-        
-        // Fade in when scrolling in from bottom
-        if (itemTop > scrollTop + containerHeight - 140) {
-          opacity = Math.max(0, 1 - (itemTop - (scrollTop + containerHeight - 140)) / 100);
-        }
-        
-        item.style.opacity = opacity;
-        item.style.transform = isVisible ? 'translateY(0)' : 'translateY(20px)';
-      });
       
       // Handle header fade effect at top
       topHeader.forEach((header) => {
@@ -259,14 +231,11 @@ const ScrollableProjectList = () => {
         ref={scrollRef}
         className="overflow-y-auto custom-scrollbar mt-8"
         style={{ 
-          height: 'calc(100vh - 240px - 40px)', // Subtract additional 40px from the bottom
-          paddingBottom: '40px', // Add padding to create space at the bottom
-          maskImage: 'linear-gradient(to bottom, black calc(100% - 80px), transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black calc(100% - 80px), transparent 100%)'
+          height: 'calc(100vh - 280px)', // Subtract additional 40px from the bottom
+          maskImage: 'linear-gradient(to bottom, transparent 0px, black 10px, black calc(100% - 80px), transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0px, black 10px, black calc(100% - 80px), transparent 100%)'
         }}
       >
-        {/* Header fade at top */}
-        <div className="sticky top-0 bg-gradient-to-b from-[var(--color-light)] to-transparent h-10 z-10 fade-scroll-header-top" />
 
         {/* Work Experience Section */}
         <div className="mb-10 text-left">
