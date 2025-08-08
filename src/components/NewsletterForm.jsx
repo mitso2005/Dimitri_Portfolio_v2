@@ -84,7 +84,7 @@ const NewsletterForm = () => {
             <div className="max-w-5xl w-full p-4 sm:p-8 shadow-md border-2 border-[var(--color-dark)] rounded-[15px]"
                 style={{ background: 'var(--color-light)', color: 'var(--color-dark)' }}>
                 <h3 className = "">Start your job search today!</h3>
-                <p className="text-sm sm:text-base mb-6">Get the latest tech news and free resources.</p>
+                <p className="text-sm sm:text-base mb-2 md:mb-4">Get the latest tech news and free resources.</p>
                 
                 {/* Image with caption - different behavior for mobile vs desktop */}
                 <div className="mb-6">
