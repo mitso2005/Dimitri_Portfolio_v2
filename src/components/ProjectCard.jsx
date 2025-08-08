@@ -471,7 +471,7 @@ export default function DraggableProjectCards() {
           ref={containerRef}
           className="shadow-md border-2 bg-[var(--color-light)] border-[var(--color-dark)] relative rounded-[15px]"
           style={{ 
-            height: 'calc(100vh - 320px)',
+            height: 'calc(65vh)',
           }}
         >
           {positions &&
