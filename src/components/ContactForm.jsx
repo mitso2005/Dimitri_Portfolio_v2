@@ -88,21 +88,6 @@ const ContactForm = () => {
                 </div>
                 <p className="text-sm sm:text-base mb-6">Looking to get more eyes to your brand? Send me an email using the form below.</p>
                 
-                {/* Remove success message display */}
-                
-                {status === 'error' && (
-                    <div
-                        className="mb-4 p-3 border rounded"
-                        style={{
-                            background: 'rgba(255,219,228,0.25)', // faded primary pink
-                            borderColor: 'var(--color-primary-pink)',
-                            color: 'var(--color-primary-pink)'
-                        }}
-                    >
-                        Failed to send message. Please try again.
-                    </div>
-                )}
-                
                 <div className="space-y-2">
                     {/* Name & Company Fields Side by Side */}
                     <div className="flex flex-col md:flex-row gap-2">

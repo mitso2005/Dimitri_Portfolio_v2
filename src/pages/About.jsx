@@ -86,7 +86,7 @@ export default function About() {
           </p>
 
           <p>
-            You should hire me in <Countdown /> <br /> when I graduate.
+            You should hire me in <Countdown /> when I graduate.
           </p>
 
           {/* Image with caption - different behavior for mobile vs desktop */}

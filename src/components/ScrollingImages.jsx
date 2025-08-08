@@ -12,7 +12,7 @@ import image8 from '../assets/img/scroll/image 8.svg';
 import image9 from '../assets/img/scroll/image 9.svg';
 import image10 from '../assets/img/scroll/image 10.svg';
 
-const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }) => {
+const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1, speed = 120 }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const images = [
     image1, image2, image3, image4, image5,
@@ -58,7 +58,12 @@ const ScrollingImages = ({ position = 'right', direction = 'down', opacity = 1 }
         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 90%, transparent 100%)'
       }}
     >
-      <div className={animationClass}>
+      <div 
+        className={animationClass}
+        style={{
+          animationDuration: `${speed}s`
+        }}
+      >
         {/* First set of images */}
         {images.map((image, index) => (
           <img

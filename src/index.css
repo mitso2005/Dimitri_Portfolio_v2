@@ -404,7 +404,6 @@ a:hover {
 /* Add a specific style for the countdown component */
 .countdown span {
   font-family: var(--font-sentient);
-  font-weight: 700;
   color: var(--color-secondary-blue);
 }
 

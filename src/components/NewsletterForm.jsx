@@ -123,21 +123,7 @@ const NewsletterForm = () => {
                     )}
                 </div>
                 
-                {status === 'error' && (
-                    <div
-                        className="mb-4 p-3 border rounded-[15px]"
-                        style={{
-                            background: 'rgba(255,219,228,0.25)', // faded primary pink
-                            borderColor: 'var(--color-primary-pink)',
-                            color: 'var(--color-primary-pink)'
-                        }}
-                    >
-                        Failed to subscribe. Please try again.
-                    </div>
-                )}
-                
                 <div className="space-y-2">
-
                     {/* Email Field */}
                     <div className="relative">
                         <input
