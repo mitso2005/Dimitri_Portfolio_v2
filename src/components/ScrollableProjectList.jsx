@@ -257,7 +257,7 @@ const ScrollableProjectList = () => {
     <div className="w-full h-full">
       <div 
         ref={scrollRef}
-        className="project-scroll-container overflow-y-auto custom-scrollbar mt-8"
+        className="overflow-y-auto custom-scrollbar mt-8"
         style={{ 
           height: 'calc(100vh - 240px - 40px)', // Subtract additional 40px from the bottom
           paddingBottom: '40px', // Add padding to create space at the bottom
