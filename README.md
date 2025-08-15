@@ -12,7 +12,7 @@ The complete design process, wireframes, and visual system are documented in the
 
 ![Design Document Preview](./src/assets/img/design_preview.png)
 
-**[📄 View Full Design Document (PDF)](./design_document.pdf)**
+**[📄 View Full Design Document (PDF)](./src/assets/pdf/design_document.pdf)**
 
 *This comprehensive design document includes:*
 - User research and personas
